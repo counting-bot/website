@@ -1,0 +1,141 @@
+<!DOCTYPE HTML>
+<html lang="en">
+	<head>
+        <!-- Primary Meta Tags -->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Counting</title>
+        <meta name="title" content="Counting">
+        <link rel="icon" href="assets/img/CountingIconRound.png" type="image/x-icon"/>
+        <meta name="description" content="The most customizable counting bot. Compete with other Discord servers to get the highest count.">
+        <meta name="keywords" content="Discord, discord, discord counting bot, counting bot, Discord counting bot, counting, Counting Discord bot, discord bot, bot, discord game, customizable discord bot, customizable, counting, customizable">
+        <meta name="theme-color" content="#a329d1">
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://counting.numselli.xyz">
+        <meta property="og:title" content="Counting">
+        <meta property="og:description" content="The most customizable counting bot. Compete with other Discord servers to get the highest count.">
+        <meta property="og:image" content="https://counting.numselli.xyz/assets/img/CountingIconRound.png">
+
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image">
+        <meta property="twitter:url" content="https://counting.numselli.xyz">
+        <meta property="twitter:title" content="Counting">
+        <meta property="twitter:description" content="The most customizable counting bot. Compete with other Discord servers to get the highest count.">
+        <meta property="twitter:image" content="https://counting.numselli.xyz/assets/img/CountingIconRound.png">
+
+
+        <!-- css imports -->
+		<link href="assets/css/fontawesome-all.min.css" rel="stylesheet">
+        <link href="assets/css/Raleway.css" rel="stylesheet">
+        <link href="assets/css/style.css" rel="stylesheet">
+
+        <!-- js imports -->
+		<script async src="assets/js/arc.min.js"></script>
+	</head>
+
+	<body>  
+        <script async src="assets/js/scrpts.js"></script>
+
+        <!-- Nav -->
+        <div id="nav">
+            <a href="#" onclick="togleNav(true)" id="togleNav"><img style="max-height: 1.7em;" width="25px" height="25px" alt="Counting's logo"src="assets/img/CountingIconRound.png"></a>
+            <a href="https://discord.com/oauth2/authorize?client_id=726560538145849374&scope=bot&permissions=3136" rel="nofollow noopener" target="_blank" onclick="togleNav()">Invite</a>
+            <a href="https://discord.gg/cz5ECsdPBT" rel="nofollow noopener" target="_blank" onclick="togleNav()">Support</a>
+            <a href="https://ko-fi.com/numselli" rel="nofollow noopener" target="_blank" onclick="togleNav()">Premium</a>
+            <a href="#scores" onclick="togleNav()">Scores</a>
+            <a href="#userscores" onclick="togleNav()">User Scores</a>
+
+            <!-- <a href="#status" onclick="togleNav()">Status</a> -->
+            <a href="#privacy" onclick="togleNav()">Privacy</a>
+            <a class="icon" onclick="togleNav()"><i class="fa fa-bars"></i></a>
+        </div>
+
+        <!-- Main -->
+        <div id="main" style="height: 100%; width: 100%; margin: 0 auto;">
+            <!-- home -->
+            <article id="home" class="panel intro inactive" style="width: 100%; height: 100%; text-align: center; margin: 0 !important;">
+                <div class="row" style="padding-top: 2.3%; padding-bottom: 4.3%;">
+                    <div class="column blueBorder verticalAlign" style="height: 10rem;">
+                        <h2 id="guilds" class="homeStatTitle">000,000</h2>
+                        <h3 style="font-weight: bold; vertical-align: middle; ">Servers</h3>
+                    </div>
+                    <div class="column blueBorder verticalAlign" style="height: 10rem;">
+                        <h2 id="dbUsers"class="homeStatTitle">000,000</h2>
+                        <h3 style="font-weight: bold;">Users</h3>
+                    </div>
+                    <div class="column blueBorder verticalAlign" style="height: 10rem;">
+                        <h2 id="numbersTotal" class="homeStatTitle">000,000</h2>
+                        <h3 style="font-weight: bold; vertical-align: middle;">Numbers Counted</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="column heading">
+                        <h2 class="homeStatTitle">About Counting</h2>
+                        <h3 style="font-weight: bold;">The most customizable counting bot. Compete with other Discord servers to get the highest count.<h3>
+                    </div>
+                </div>
+            </article>
+
+            <!-- guild socres -->
+            <article id="scores" class="panel inactive" style="width: 100%; margin: 0 auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="sortbutton">Icon</th>
+                            <th onclick="sortdata(this)" class="sortbutton" dataType="string" name="name">Name <i id="name" class=""></i></th>
+                            <th onclick="sortdata(this)" class="sortbutton" dataType="int" name="last_num">Current Score <i id="last_num" class=""></i></th>
+                            <th onclick="sortdata(this)" class="sortbutton" dataType="int" name ="hs">High Score <i id="hs" class=""></i></th>
+                        </tr>
+                    </thead>
+                    <tbody id='scoresTableBody'>
+                    </tbody>
+                </table>
+            </article>
+
+            <!-- user scores -->
+            <article id="userscores" class="panel inactive" style="width: 100%; margin: 0 auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Username</th>
+                            <th>Total</i></th>
+                        </tr>
+                    </thead>
+                    <tbody id='userscoresTableBody'>
+                    </tbody>
+                </table>
+            </article>
+
+            <!-- Status -->
+            <article id="status" class="panel inactive" style="margin: 0 auto;">
+                <div id="clusterContainer" class="row">
+                </div>
+            </article>
+            <!-- style="display: grid; grid-gap: 1rem; grid-template-columns:  repeat(3, auto); align-items: center; justify-content: center; background-color: #3a4149;" -->
+
+            <!-- privacy -->
+            <article id="privacy" class="panel inactive" style="width: 100%; margin: 0 auto;">
+                <div style="margin-left: 1em; margin-right: 1em;">
+                    <center><h2>PRIVACY POLICY</h2></center>
+
+                    <h4>1. Stored Data</h4>
+                    <span>The bot will store information automatically when being invited to a new Discord Server. This information can include:</span>
+                    <ul>
+                        <li>The servers id</li>
+                        <li>The bot's default prefix</li>
+                        <li>Bullet 3</li>
+                    </ul>
+
+                    <h4>2. Updating Data</h4>
+                    <span>The stored data may be updated when using commands, voting on bot listing stites, or by becoming pateron. Updating data will require the action of a user. We may store any sort of Snowflake IDs provided by Discord and user input associated with our bot's features in order to provide features may provide. We will not knowingly store sensitive data, identifying data, unnecessary data, or data which is not used in our bot's features. By interacting with our bot, you authorize us to store said data.</span>
+
+                    <h4>3. Removal of Data</h4>
+                    <span>Users may manually request this data to be deleted. Additionally, users who own or maintain said server can delete data using the associated command, or by making a request in a support server we have and proving that they own or maintain the guild in question. Guild-specific data is stored with a reference to the guild, and will be deleted with guild data. Only the server owner may ask for the removal of data from their server through the bot's support server. We may ask for verification of ownership of the Server.</span> 
+                </div>
+            </article>
+        </div>
+	</body>
+</html>
