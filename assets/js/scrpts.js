@@ -1,10 +1,9 @@
 // set golabl vars
 let gloabldata = {
-    "APIurl":`https://api.numeslli.xyz`,
+    "APIurl":`https://api.numselli.xyz/counting`,
     "scorestabledata":[],
     "scoresDataSortDirection": false,
     "userscorestabledata": [],
-    "stats":{}
 };
 const breakpoints=function(){"use strict";function e(e){t.init(e)}let t={list:null,media:{},events:[],init:function(e){t.list=e,window.addEventListener("resize",t.poll),window.addEventListener("orientationchange",t.poll),window.addEventListener("load",t.poll),window.addEventListener("fullscreenchange",t.poll)},active:function(e){let n,a,s,i,r,d,c;if(!(e in t.media)){if(">="==e.substr(0,2)?(a="gte",n=e.substr(2)):"<="==e.substr(0,2)?(a="lte",n=e.substr(2)):">"==e.substr(0,1)?(a="gt",n=e.substr(1)):"<"==e.substr(0,1)?(a="lt",n=e.substr(1)):"!"==e.substr(0,1)?(a="not",n=e.substr(1)):(a="eq",n=e),n&&n in t.list)if(i=t.list[n],Array.isArray(i)){if(r=parseInt(i[0]),d=parseInt(i[1]),isNaN(r)){if(isNaN(d))return;c=i[1].substr(String(d).length)}else c=i[0].substr(String(r).length);if(isNaN(r))switch(a){case"gte":s="screen";break;case"lte":s="screen and (max-width: "+d+c+")";break;case"gt":s="screen and (min-width: "+(d+1)+c+")";break;case"lt":s="screen and (max-width: -1px)";break;case"not":s="screen and (min-width: "+(d+1)+c+")";break;default:s="screen and (max-width: "+d+c+")"}else if(isNaN(d))switch(a){case"gte":s="screen and (min-width: "+r+c+")";break;case"lte":s="screen";break;case"gt":s="screen and (max-width: -1px)";break;case"lt":s="screen and (max-width: "+(r-1)+c+")";break;case"not":s="screen and (max-width: "+(r-1)+c+")";break;default:s="screen and (min-width: "+r+c+")"}else switch(a){case"gte":s="screen and (min-width: "+r+c+")";break;case"lte":s="screen and (max-width: "+d+c+")";break;case"gt":s="screen and (min-width: "+(d+1)+c+")";break;case"lt":s="screen and (max-width: "+(r-1)+c+")";break;case"not":s="screen and (max-width: "+(r-1)+c+"), screen and (min-width: "+(d+1)+c+")";break;default:s="screen and (min-width: "+r+c+") and (max-width: "+d+c+")"}}else s="("==i.charAt(0)?"screen and "+i:i;t.media[e]=!!s&&s}return t.media[e]!==!1&&window.matchMedia(t.media[e]).matches},on:function(e,n){t.events.push({query:e,handler:n,state:!1}),t.active(e)&&n()},poll:function(){let e,n;for(e=0;e<t.events.length;e++)n=t.events[e],t.active(n.query)?n.state||(n.state=!0,n.handler()):n.state&&(n.state=!1)}};return e._=t,e.on=function(e,n){t.on(e,n)},e.active=function(e){return t.active(e)},e}();!function(e,t){"function"==typeof define&&define.amd?define([],t):"object"==typeof exports?module.exports=t():e.breakpoints=t()}(this,function(){return breakpoints});
 
@@ -95,80 +94,25 @@ async function pageLoad(){
                 document.getElementById('userscoresTableBody').append(tr);
             })
         break;
-
-        case'status':
-            gloabldata.stats = await getAPIdata("stats")
-            gloabldata.stats.clusters.map(async cluster=>{
-                cluster.shardStats.map(async shard=>{
-                    console.log(shard)
-                    const shardDiv = document.createElement("div");
-                    shardDiv.className="column"
-                    shardDiv.classList="column blueBorder verticalAlign"
-
-                    const shardID = document.createElement("span");
-                    shardID.innerHTML = `Shard #${shard.id}`;
-                    shardDiv.appendChild(shardID);
-
-                    const userCount = document.createElement("span");
-                    userCount.innerHTML = `Users: ${formatNumber(shard.users)}`;
-                    shardDiv.appendChild(userCount);
-
-                    const cerverCount = document.createElement("span");
-                    cerverCount.innerHTML = `Servers: ${formatNumber(shard.guilds)}`;
-                    shardDiv.appendChild(cerverCount);
-
-                    const latencyCount = document.createElement("span");
-                    latencyCount.innerHTML = `Latency: ${formatNumber(shard.latency)}MS`;
-                    shardDiv.appendChild(latencyCount);
-
-                    // "status": "ready",
-                    // Latency:
-                    // console.log(cluster.shardStats)
-
-                    //     <div class="row" style="padding-top: 2.3%; padding-bottom: 4.3%;">
-                    //     <div class="column blueBorder verticalAlign" style="height: 10rem;">
-                    //         <h2 id="guilds" class="homeStatTitle">000,000</h2>
-                    //         <h3 style="font-weight: bold; vertical-align: middle; ">Servers</h3>
-                    //     </div>
-                    //     <div class="column blueBorder verticalAlign" style="height: 10rem;">
-                    //         <h2 id="dbUsers"class="homeStatTitle">000,000</h2>
-                    //         <h3 style="font-weight: bold;">Users</h3>
-                    //     </div>
-                    //     <div class="column blueBorder verticalAlign" style="height: 10rem;">
-                    //         <h2 id="numbersTotal" class="homeStatTitle">000,000</h2>
-                    //         <h3 style="font-weight: bold; vertical-align: middle;">Numbers Counted</h3>
-                    //     </div>
-                    // </div>
-                    document.getElementById("clusterContainer").appendChild(shardDiv);
-
-                })
-
-                //         console.log(cluster)
-                //         // rounded
-                //         $('#clusterContainer').append(`
-                //             <div id="cluster_${cluster.id}" style="justify-content: center;  border-radius: 30px; border: 2.5px solid rgba(170, 50, 220, .6); min-height: 100px">
-                //                 <span>Cluster: ${cluster.id}<span>
-                //                 <div id="cluster_${cluster.id}_shardContainer" style="display: grid;  grid-gap: 1rem; grid-template-columns:  repeat(3, auto);
-                //                     align-items: center; "></div>
-                //             </div>
-                //         `);
-
-                //         cluster.shardStats.map(shard=>{
-                //             let shardColor = shardStatus(shard.status);
-                //             $(`#cluster_${cluster.id}_shardContainer`).append(`
-                //                 <div id="shard_${shard.id}" style="background: #0F273C; width: 55px; hight: 55px; text-align: center;">
-                //                     <span style="color: ${shardColor}">${shard.id}</span>
-                //                 </div>
-                //             `);
-                //         })
-            })
+        case `vote`:
+            const votingSites = [
+                "https://top.gg/bot/726560538145849374/vote",
+                "https://discords.com/bots/bot/726560538145849374/vote",
+                "https://infinitybotlist.com/bots/726560538145849374/vote",
+                "https://discordbotlist.com/bots/counting-1881/upvote",
+                "https://discordlist.space/bot/726560538145849374/upvote",
+                "https://discordextremelist.xyz/en-US/bots/726560538145849374/upvote",
+                "https://discord.boats/bot/726560538145849374/vote",
+                "https://bots.discordlabs.org/bot/726560538145849374/vote"
+            ]
+            window.location.href = votingSites[Math.floor((Math.random() * votingSites.length))];
         break;
         default:
-            if (Object.keys(gloabldata.stats).length === 0) gloabldata.stats = await getAPIdata("stats");
+            const stats = await getAPIdata("stats");
 
-            ['guilds', "dbUsers", "numbersTotal"].forEach(async stat=>{
-                document.getElementById(stat).innerHTML = formatNumber(stat === "numbersTotal" ? gloabldata.stats.numbers.total : gloabldata.stats[stat])
-            })
+            document.getElementById("guilds").innerHTML = formatNumber(stats.guilds);
+            document.getElementById("dbUsers").innerHTML = formatNumber(stats.dbUsers);
+            document.getElementById("numbersTotal").innerHTML = formatNumber(stats.numbers.total);
         break;
     }
 }

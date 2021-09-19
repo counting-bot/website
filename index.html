@@ -41,13 +41,11 @@
         <!-- Nav -->
         <div id="nav">
             <a href="#" onclick="togleNav(true)" id="togleNav"><img style="max-height: 1.7em;" width="25px" height="25px" alt="Counting's logo"src="assets/img/CountingIconRound.png"></a>
-            <a href="https://discord.com/oauth2/authorize?client_id=726560538145849374&scope=bot&permissions=3136" rel="nofollow noopener" target="_blank" onclick="togleNav()">Invite</a>
+            <a href="https://discord.com/oauth2/authorize?client_id=726560538145849374&scope=bot%20applications.commands" rel="nofollow noopener" target="_blank" onclick="togleNav()">Invite</a>
             <a href="https://discord.gg/cz5ECsdPBT" rel="nofollow noopener" target="_blank" onclick="togleNav()">Support</a>
             <a href="https://ko-fi.com/numselli" rel="nofollow noopener" target="_blank" onclick="togleNav()">Premium</a>
             <a href="#scores" onclick="togleNav()">Scores</a>
             <a href="#userscores" onclick="togleNav()">User Scores</a>
-
-            <!-- <a href="#status" onclick="togleNav()">Status</a> -->
             <a href="#privacy" onclick="togleNav()">Privacy</a>
             <a class="icon" onclick="togleNav()"><i class="fa fa-bars"></i></a>
         </div>
@@ -109,13 +107,6 @@
                 </table>
             </article>
 
-            <!-- Status -->
-            <article id="status" class="panel inactive" style="margin: 0 auto;">
-                <div id="clusterContainer" class="row">
-                </div>
-            </article>
-            <!-- style="display: grid; grid-gap: 1rem; grid-template-columns:  repeat(3, auto); align-items: center; justify-content: center; background-color: #3a4149;" -->
-
             <!-- privacy -->
             <article id="privacy" class="panel inactive" style="width: 100%; margin: 0 auto;">
                 <div style="margin-left: 1em; margin-right: 1em;">
@@ -134,6 +125,13 @@
 
                     <h4>3. Removal of Data</h4>
                     <span>Users may manually request this data to be deleted. Additionally, users who own or maintain said server can delete data using the associated command, or by making a request in a support server we have and proving that they own or maintain the guild in question. Guild-specific data is stored with a reference to the guild, and will be deleted with guild data. Only the server owner may ask for the removal of data from their server through the bot's support server. We may ask for verification of ownership of the Server.</span> 
+                </div>
+            </article>
+
+            <!-- vote page -->
+            <article id="vote" class="panel inactive" style="width: 100%; margin: 0 auto;">
+                <div style="margin-left: 1em; margin-right: 1em; margin-top: 10em;">
+                    <center><h2>Redirecting you to a voting site</h2></center>
                 </div>
             </article>
         </div>
