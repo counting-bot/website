@@ -72,7 +72,8 @@ async function pageLoad(){
             })
         break;
         case `userscores`:
-            const userscoresTableBody = document.getElementById("scoresTableBody");
+            const userscoresTableBody = document.getElementById("userScoresTableBody");
+            console.log(userscoresTableBody)
             if (userscoresTableBody.getElementsByTagName("tr").length>0) return
 
             gloabldata.userscorestabledata = (await getAPIdata("userscores")).slice(0, 60);
@@ -91,7 +92,7 @@ async function pageLoad(){
                 scoresNode.innerHTML = formatNumber(correctnumbers+wrongnumbers);
                 tr.appendChild(scoresNode);
 
-                document.getElementById('userscoresTableBody').append(tr);
+                document.getElementById('userScoresTableBody').append(tr);
             })
         break;
         case `vote`:
