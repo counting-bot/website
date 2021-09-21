@@ -73,7 +73,6 @@ async function pageLoad(){
         break;
         case `userscores`:
             const userscoresTableBody = document.getElementById("userScoresTableBody");
-            console.log(userscoresTableBody)
             if (userscoresTableBody.getElementsByTagName("tr").length>0) return
 
             gloabldata.userscorestabledata = (await getAPIdata("userscores")).slice(0, 60);
@@ -95,6 +94,62 @@ async function pageLoad(){
                 document.getElementById('userScoresTableBody').append(tr);
             })
         break;
+        case `status`:
+            const clsuterContainer = document.getElementById("clsuterContainer");
+            if (clsuterContainer.getElementsByTagName("div").length>0) document.getElementById("clsuterContainer").innerHTML = "";
+            
+            const status = await getAPIdata("stats");
+            status.clusters.map(cluster => {
+                cluster.shardStats.map(shard => {
+                    const shardNode = document.createElement("div");
+                    shardNode.id=`shard_${cluster.id}`
+                    shardNode.classList='shardNode'
+
+                    const shardTitle = document.createElement("div");
+                    shardTitle.classList="shardTitle"
+                    const shardID = document.createElement("span")
+                    shardID.innerHTML = `Shard #${shard.id}`
+                    shardTitle.appendChild(shardID)
+
+                    const shardStatusDiv = document.createElement("div");
+                    shardStatusDiv.style.backgroundColor = shardStatus(shard.status)
+                    shardStatusDiv.classList="shardStatusDiv"
+                    shardTitle.appendChild(shardStatusDiv)
+                    shardNode.appendChild(shardTitle)
+
+                    const ShardBody = document.createElement("div");
+                    ShardBody.classList="shardStatsdGrid"
+
+                    const latencyDIV = document.createElement("div");
+                    const latencytext = document.createElement("span")
+                    latencytext.innerHTML = "Latency: "
+                    latencyDIV.appendChild(latencytext)
+                    const latency = document.createElement("span")
+                    latency.innerHTML = `${formatNumber(shard.latency)} MS`
+                    latencyDIV.appendChild(latency)
+                    ShardBody.appendChild(latencyDIV)
+                    const guildsDIV = document.createElement("div");
+                    const guildsText = document.createElement("span")
+                    guildsText.innerHTML = "Guilds: "
+                    guildsDIV.appendChild(guildsText)
+                    const guilds = document.createElement("span")
+                    guilds.innerHTML = formatNumber(shard.guilds)
+                    guildsDIV.appendChild(guilds)
+                    ShardBody.appendChild(guildsDIV)
+                    const usersDIV = document.createElement("div");
+                    const usersText = document.createElement("span")
+                    usersText.innerHTML = "Users: "
+                    usersDIV.appendChild(usersText)
+                    const users = document.createElement("span")
+                    users.innerHTML = formatNumber(shard.users)
+                    usersDIV.appendChild(users)
+                    ShardBody.appendChild(usersDIV)
+                    shardNode.appendChild(ShardBody)
+
+                    document.getElementById("clsuterContainer").append(shardNode);
+                })
+            })
+        break
         case `vote`:
             const votingSites = [
                 "https://top.gg/bot/726560538145849374/vote",

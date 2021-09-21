@@ -166,3 +166,27 @@ tbody tr:hover {
 thead tr:hover {
     cursor: pointer;
 }
+
+/* status page */
+.shardStatusDiv{
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    float: right;    
+}
+.shardTitle{
+    display: block;
+}
+.shardNode{
+    background-color: #1f1d1d;
+    padding: 3px 10px;
+}
+.shardGrid{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(344px, 1fr));
+    grid-gap: 5px;
+}
+.shardStatsdGrid{
+    display: grid;
+    grid-template-columns: auto auto;
+}
