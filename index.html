@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Counting</title>
         <meta name="title" content="Counting">
-        <link rel="icon" href="assets/img/CountingIconRound.png" type="image/x-icon"/>
+        <link rel="icon" href="/assets/img/CountingIconRound.png" type="image/x-icon"/>
         <meta name="description" content="The most customizable counting bot. Compete with other Discord servers to get the highest count.">
         <meta name="keywords" content="Discord, discord, discord counting bot, counting bot, Discord counting bot, counting, Counting Discord bot, discord bot, bot, discord game, customizable discord bot, customizable, counting, customizable">
         <meta name="theme-color" content="#a329d1">
@@ -32,7 +32,7 @@
         <link href="/assets/css/style.css" rel="stylesheet">
 
         <!-- js imports -->
-        <script async src="https://arc.io/widget.min.js#vjBL7bu4"></script>
+        <script async src="/assets/js/arcWidget.min.js"></script>
 		<script async defer data-website-id="b2b9ac89-8f5d-4131-acea-c621bfddbee2" src="https://insights.numselli.xyz/umami.js"></script>
 	</head>
 
@@ -40,16 +40,16 @@
         <script async src="/assets/js/scrpts.js"></script>
 
         <!-- Nav -->
-        <div id="nav">
-            <a href="#" onclick="togleNav(true)" id="togleNav"><img style="max-height: 1.7em;" width="25px" height="25px" alt="Counting's logo"src="assets/img/CountingIconRound.png"></a>
-            <a href="https://discord.com/oauth2/authorize?client_id=726560538145849374&scope=bot%20applications.commands" rel="nofollow noopener" target="_blank" onclick="togleNav()">Invite</a>
-            <a href="https://discord.gg/cz5ECsdPBT" rel="nofollow noopener" target="_blank" onclick="togleNav()">Support</a>
-            <a href="https://ko-fi.com/numselli" rel="nofollow noopener" target="_blank" onclick="togleNav()">Premium</a>
-            <a href="#scores" onclick="togleNav()">Scores</a>
-            <a href="#userscores" onclick="togleNav()">User Scores</a>
-            <a href="#privacy" onclick="togleNav()">Privacy</a>
-            <a href="#status" onclick="togleNav()">Status</a>
-            <a class="icon" onclick="togleNav()"><i class="fa fa-bars"></i></a>
+        <div id="nav" class="topnav">
+            <a href="#" hide='true' id="togleNav"><img hide='true' style="max-height: 1.7em;" width="25px" height="25px" alt="Counting's logo"src="/assets/img/CountingIconRound.png"></a>
+            <a href="https://discord.com/oauth2/authorize?client_id=726560538145849374&scope=bot%20applications.commands" rel="nofollow noopener" target="_blank" id="navLinkInvite">Invite</a>
+            <a href="https://discord.gg/cz5ECsdPBT" rel="nofollow noopener" target="_blank" id="navLinksupport">Support</a>
+            <a href="https://ko-fi.com/numselli" rel="nofollow noopener" target="_blank" id="navLinkPremium">Premium</a>
+            <a href="#scores" id="navLinkScores">Scores</a>
+            <a href="#userscores" id="navLinkUserScores">User Scores</a>
+            <a href="#privacy" id="navLinkPrivacy">Privacy</a>
+            <a href="#status" id="navLinkStatus">Status</a>
+            <a class="icon" id="navLinkToggle"><i class="fa fa-bars"></i></a>
         </div>
 
         <!-- Main -->
@@ -84,9 +84,9 @@
                     <thead>
                         <tr>
                             <th class="sortbutton">Icon</th>
-                            <th onclick="sortdata(this)" class="sortbutton" dataType="string" name="name">Name <i id="name" class=""></i></th>
-                            <th onclick="sortdata(this)" class="sortbutton" dataType="int" name="last_num">Current Score <i id="last_num" class=""></i></th>
-                            <th onclick="sortdata(this)" class="sortbutton" dataType="int" name ="hs">High Score <i id="hs" class=""></i></th>
+                            <th id="scoresSortName" class="sortbutton" dataType="string" name="name">Name <i id="name" class=""></i></th>
+                            <th id="scoresSortCS" class="sortbutton" dataType="int" name="last_num">Current Score <i id="last_num" class=""></i></th>
+                            <th id="scoresSortHS" class="sortbutton" dataType="int" name ="hs">High Score <i id="hs" class=""></i></th>
                         </tr>
                     </thead>
                     <tbody id='scoresTableBody'>

@@ -9,10 +9,24 @@ const breakpoints=function(){"use strict";function e(e){t.init(e)}let t={list:nu
 
 
 // event listeners
+// page load
 document.addEventListener("DOMContentLoaded", pageLoad);
 window.addEventListener("hashchange", pageLoad, false);
 pageLoad()
-
+// sorting buttons
+document.getElementById('scoresSortName').addEventListener('click', sortdata);
+document.getElementById('scoresSortCS').addEventListener('click', sortdata);
+document.getElementById('scoresSortHS').addEventListener('click', sortdata);
+// nav buttons
+document.getElementById('togleNav').addEventListener('click', togleNav);
+document.getElementById('navLinkInvite').addEventListener('click', togleNav);
+document.getElementById('navLinksupport').addEventListener('click', togleNav);
+document.getElementById('navLinkPremium').addEventListener('click', togleNav);
+document.getElementById('navLinkScores').addEventListener('click', togleNav);
+document.getElementById('navLinkUserScores').addEventListener('click', togleNav);
+document.getElementById('navLinkPrivacy').addEventListener('click', togleNav);
+document.getElementById('navLinkStatus').addEventListener('click', togleNav);
+document.getElementById('navLinkToggle').addEventListener('click', togleNav);
 
 
 // headder, title adujust
@@ -225,7 +239,8 @@ async function sortdata(column){
     const old_tbody = document.getElementById("scoresTableBody")
     old_tbody.parentNode.replaceChild(new_tbody, old_tbody);
 }
-function togleNav(hide) {
+function togleNav(element) {
+    const hide = element.srcElement.getAttribute("hide")
     const x = document.getElementById("nav");
     x.className = hide ? "topnav" : x.className === "topnav" ? "responsive" : "topnav"
 }
