@@ -1,71 +1,23 @@
 /* documnt */
-html, body{
-    font-family: 'Raleway';
-    background-color: #181818;
-    color: #ffffff;
-    overflow-x: hidden;
-    margin:0;
-}
-html::-webkit-scrollbar {
-    display: none;
-}
-html{
-    -ms-overflow-style: none;
-}
-a:link, a:visited, a:hover {
-    color:white;
-    background-color: transparent;
-    text-decoration: none;
-}
-
+html, body{font-family: 'Raleway';background-color: #181818;color: #ffffff;overflow-x: hidden;margin:0;}
+html::-webkit-scrollbar {display: none;}
+html{-ms-overflow-style: none;}
+a:link, a:visited, a:hover {color:white;background-color: transparent;text-decoration: none;}
 
 /* nav */
-#nav {
-    overflow: hidden;
-    background-color: #000000;
-}
-#nav a {
-    float: left;
-    display: block;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
-}
-#nav a:hover {
-    background-color: #111;
-    color:#ffffff;
-}
-#nav a.active {
-    color: #ffffff;
-}
-#nav .icon {
-    display: none;
-}
-@media screen and (max-width: 600px) {
-    #nav a:not(:first-child) {
-        display: none;
-        text-align: center !important;
-   }
-    #nav a.icon {
-        float: right;
-        display: block;
-   }
-}
-@media screen and (max-width: 600px) {
-    #nav.responsive {
-        position: relative;
-   }
-    #nav.responsive .icon {
-        position: absolute;
-        right: 0;
-        top: 0;
-   }
-    #nav.responsive a {
-        float: none;
-        display: block;
-        text-align: left;
-   }
-}
+#nav {overflow: hidden;background-color: #000000;}
+#nav a {float: left;display: block;padding: 14px 16px;text-decoration: none;font-size: 17px;}
+#nav a:hover {background-color: #111;color:#ffffff;}
+#nav a.active {color: #ffffff;}
+#nav .icon {display: none;}
+@media screen and (max-width: 600px) {#nav a:not(:first-child) {display: none;text-align: center !important;}#nav a.icon {float: right;display: block;}}
+@media screen and (max-width: 600px) {#nav.responsive {position: relative;}#nav.responsive .icon {position: absolute;right: 0;top: 0;}#nav.responsive a {float: none;display: block;text-align: left;}}
+
+/* Section/Article */
+section, article, section > :last-child, section:last-child, article > :last-child, article:last-child {margin-bottom: 3em;margin-top: 3em;}
+.inactive{display: none;}
+.active{visibility: visible}
+
 
 
 /* home page stats */
@@ -101,20 +53,6 @@ a:link, a:visited, a:hover {
     margin: 1rem;
     max-width: 450px;
 }
-
-
-/* Section/Article */
-section, article, section > :last-child, section:last-child, article > :last-child, article:last-child {
-    margin-bottom: 3em;
-    margin-top: 3em;
-}
-.inactive{
-    display: none;
-}
-.active{
-    visibility: visible 
-}
-
 
 /* scores tables */
 th, tr, td {
