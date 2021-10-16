@@ -173,7 +173,8 @@ async function pageLoad(){
                 "https://discordlist.space/bot/726560538145849374/upvote",
                 "https://discordextremelist.xyz/en-US/bots/726560538145849374/upvote",
                 "https://discord.boats/bot/726560538145849374/vote",
-                "https://bots.discordlabs.org/bot/726560538145849374/vote"
+                "https://bots.discordlabs.org/bot/726560538145849374/vote",
+                "https://townlist.xyz/bot/726560538145849374/vote"
             ]
             window.location.href = votingSites[Math.floor((Math.random() * votingSites.length))];
         break;
