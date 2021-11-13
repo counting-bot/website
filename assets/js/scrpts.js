@@ -174,7 +174,6 @@ async function pageLoad(){
                 "https://discordextremelist.xyz/en-US/bots/726560538145849374/upvote",
                 "https://discord.boats/bot/726560538145849374/vote",
                 "https://bots.discordlabs.org/bot/726560538145849374/vote",
-                "https://townlist.xyz/bot/726560538145849374/vote"
             ]
             window.location.href = votingSites[Math.floor((Math.random() * votingSites.length))];
         break;
@@ -263,5 +262,5 @@ function imgError() {
     if (this.src != 'assets/img/error.png') this.src = 'assets/img/error.png';
 }
 function formatNumber(num){
-    return num?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 }
