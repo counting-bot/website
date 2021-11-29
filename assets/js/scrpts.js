@@ -1,6 +1,5 @@
 // set golabl vars
 let gloabldata = {
-    "APIurl":`https://api.numselli.xyz/counting`,
     "scorestabledata":[],
     "scoresDataSortDirection": false,
     "userscorestabledata": [],
@@ -255,7 +254,7 @@ const shardStatus = (status)=>{
     }[status]
 }
 async function getAPIdata(item) {	
-    const ajaxdata = await fetch(`${gloabldata.APIurl}/${item}`).catch(err=>console.error);
+    const ajaxdata = await fetch(`https://api.numselli.xyz/counting/${item}`).catch(err=>console.error);
     return await ajaxdata.json() ?? undefined
 }
 function imgError() {
