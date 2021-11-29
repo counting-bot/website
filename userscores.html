@@ -38,6 +38,51 @@
 
 	<body>  
         <script type="application/javascript" async src="/assets/js/pageUtils.js"></script>
+        <script>
+            // set golabl vars
+            let gloabldata = {
+                "scoresDataSortDirection": false,
+                "userscorestabledata": [],
+            };
+
+            // event listeners
+            // page load
+            document.addEventListener("DOMContentLoaded", pageLoad);
+            pageLoad()
+            
+            // headder, title adujust
+            async function pageLoad(){
+                const userscoresTableBody = document.getElementById("userScoresTableBody");
+                if (userscoresTableBody.getElementsByTagName("tr").length>0) return
+
+                const ajaxdata = await fetch(`https://api.numselli.xyz/counting/userscores`).catch(err=>console.error);
+                gloabldata.userscorestabledata = (await ajaxdata.json()).slice(0, 60)
+                gloabldata.userscorestabledata.forEach(async({correctnumbers, username, wrongnumbers}, index) => {
+                    const tr = document.createElement("tr")
+
+                    const rankNode = document.createElement("td")
+                    rankNode.innerHTML = index+1
+                    tr.appendChild(rankNode)
+
+                    const userNameNode = document.createElement("td")
+                    userNameNode.innerHTML = username;
+                    tr.appendChild(userNameNode);
+
+                    const scoresNode = document.createElement("td");
+                    scoresNode.innerHTML = formatNumber(correctnumbers+wrongnumbers);
+                    tr.appendChild(scoresNode);
+
+                    document.getElementById('userScoresTableBody').append(tr);
+                })
+            }
+
+            function imgError() {
+                if (this.src != 'assets/img/error.png') this.src = 'assets/img/error.png';
+            }
+            function formatNumber(num){
+                return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+            }
+        </script>
 
         <!-- Nav -->
         <div id="nav" class="topnav">

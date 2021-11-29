@@ -11,9 +11,7 @@ document.addEventListener("DOMContentLoaded", pageLoad);
 window.addEventListener("hashchange", pageLoad, false);
 pageLoad()
 // sorting buttons
-document.getElementById('scoresSortName').addEventListener('click', sortdata);
-document.getElementById('scoresSortCS').addEventListener('click', sortdata);
-document.getElementById('scoresSortHS').addEventListener('click', sortdata);
+
 // nav buttons
 document.getElementById('togleNav').addEventListener('click', togleNav);
 document.getElementById('navLinkInvite').addEventListener('click', togleNav);
@@ -30,137 +28,8 @@ document.getElementById('navLinkToggle').addEventListener('click', togleNav);
 async function pageLoad(){
     // per page logic
     switch(title){
-        case `scores`:
-            const scoresTableBody = document.getElementById("scoresTableBody");
-            if (scoresTableBody.getElementsByTagName("tr").length>0) return
-
-            gloabldata.scorestabledata = await getAPIdata("scores");
-            gloabldata.scorestabledata.map(({name, url, hs, last_num})=>{
-                const tr = document.createElement("tr")
-                tr.className="tr"
-
-                const imgTD = document.createElement("td")
-                let img = document.createElement("img")
-                img.className="guildimg"
-                img.src = url
-                img.alt= `${name}'s guild icon`
-                img.loading="lazy"
-                img.onerror=imgError
-                tr.appendChild(imgTD.appendChild(img));
-
-                const nameNode = document.createElement("td")
-                nameNode.innerHTML=name
-                tr.appendChild(nameNode)
-
-                const lastNumNode = document.createElement("td")
-                lastNumNode.innerHTML = formatNumber(last_num)
-                tr.appendChild(lastNumNode)
-
-                const hsNumNode = document.createElement("td")
-                hsNumNode.innerHTML = formatNumber(hs)
-                tr.appendChild(hsNumNode)
-
-                document.getElementById('scoresTableBody').append(tr)                
-            })
-        break;
         case `userscores`:
-            const userscoresTableBody = document.getElementById("userScoresTableBody");
-            if (userscoresTableBody.getElementsByTagName("tr").length>0) return
-
-            gloabldata.userscorestabledata = (await getAPIdata("userscores")).slice(0, 60);
-            gloabldata.userscorestabledata.forEach(async({correctnumbers, username, wrongnumbers}, index) => {
-                const tr = document.createElement("tr")
-
-                const rankNode = document.createElement("td")
-                rankNode.innerHTML = index+1
-                tr.appendChild(rankNode)
-
-                const userNameNode = document.createElement("td")
-                userNameNode.innerHTML = username;
-                tr.appendChild(userNameNode);
-
-                const scoresNode = document.createElement("td");
-                scoresNode.innerHTML = formatNumber(correctnumbers+wrongnumbers);
-                tr.appendChild(scoresNode);
-
-                document.getElementById('userScoresTableBody').append(tr);
-            })
-        break;
-        case `status`:
-            const clsuterContainer = document.getElementById("clsuterContainer");
-            if (clsuterContainer.getElementsByTagName("div").length>0) document.getElementById("clsuterContainer").innerHTML = "";
-            
-            const status = await getAPIdata("stats");
-            status.clusters.map(cluster => {
-                cluster.shardStats.map(shard => {
-                    const shardNode = document.createElement("div");
-                    shardNode.id=`shard_${cluster.id}`
-                    shardNode.classList='shardNode'
-
-                    const shardTitle = document.createElement("div");
-                    shardTitle.classList="shardTitle"
-                    const shardID = document.createElement("span")
-                    shardID.innerHTML = `Shard #${shard.id}`
-                    shardTitle.appendChild(shardID)
-
-                    const shardStatusDiv = document.createElement("div");
-                    shardStatusDiv.style.backgroundColor = shardStatus(shard.status)
-                    shardStatusDiv.classList="shardStatusDiv"
-                    shardTitle.appendChild(shardStatusDiv)
-                    shardNode.appendChild(shardTitle)
-
-                    const ShardBody = document.createElement("div");
-                    ShardBody.classList="shardStatsdGrid"
-
-                    const latencyDIV = document.createElement("div");
-                    const latencytext = document.createElement("span")
-                    latencytext.innerHTML = "Latency: "
-                    latencyDIV.appendChild(latencytext)
-                    const latency = document.createElement("span")
-                    latency.innerHTML = `${formatNumber(shard.latency)} MS`
-                    latencyDIV.appendChild(latency)
-                    ShardBody.appendChild(latencyDIV)
-                    const guildsDIV = document.createElement("div");
-                    const guildsText = document.createElement("span")
-                    guildsText.innerHTML = "Guilds: "
-                    guildsDIV.appendChild(guildsText)
-                    const guilds = document.createElement("span")
-                    guilds.innerHTML = formatNumber(shard.guilds)
-                    guildsDIV.appendChild(guilds)
-                    ShardBody.appendChild(guildsDIV)
-                    const usersDIV = document.createElement("div");
-                    const usersText = document.createElement("span")
-                    usersText.innerHTML = "Users: "
-                    usersDIV.appendChild(usersText)
-                    const users = document.createElement("span")
-                    users.innerHTML = formatNumber(shard.users)
-                    usersDIV.appendChild(users)
-                    ShardBody.appendChild(usersDIV)
-                    shardNode.appendChild(ShardBody)
-
-                    document.getElementById("clsuterContainer").append(shardNode);
-                })
-            })
-        break
-        case `vote`:
-            const votingSites = [
-                "https://top.gg/bot/726560538145849374/vote",
-                "https://discords.com/bots/bot/726560538145849374/vote",
-                "https://infinitybotlist.com/bots/726560538145849374/vote",
-                "https://discordbotlist.com/bots/counting-1881/upvote",
-                "https://discordlist.space/bot/726560538145849374/upvote",
-                "https://discordextremelist.xyz/en-US/bots/726560538145849374/upvote",
-                "https://discord.boats/bot/726560538145849374/vote",
-                "https://bots.discordlabs.org/bot/726560538145849374/vote",
-            ]
-            window.location.href = votingSites[Math.floor((Math.random() * votingSites.length))];
-        break;
-        default:
-            const stats = await getAPIdata("stats");
-
-            document.getElementById("guilds").innerHTML = formatNumber(stats.guilds);
-            document.getElementById("dbUsers").innerHTML = formatNumber(stats.dbUsers);
-            document.getElementById("numbersTotal").innerHTML = formatNumber(stats.numbers.total);
+          
         break;
     }
 }

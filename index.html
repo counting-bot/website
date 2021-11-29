@@ -38,6 +38,20 @@
 
 	<body>  
         <script type="application/javascript" async src="/assets/js/pageUtils.js"></script>
+        <script>
+            (async()=>{
+                const ajaxdata = await fetch(`https://api.numselli.xyz/counting/stats`).catch(err=>console.error);
+                const {guilds, dbUsers, numbers} = await ajaxdata.json()
+                
+                document.getElementById("guilds").innerHTML = formatNumber(guilds);
+                document.getElementById("dbUsers").innerHTML = formatNumber(dbUsers);
+                document.getElementById("numbersTotal").innerHTML = formatNumber(numbers.total);
+            })()
+
+            function formatNumber(num){
+                return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+            }
+        </script>
 
         <!-- Nav -->
         <div id="nav" class="topnav">
