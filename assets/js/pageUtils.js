@@ -9,18 +9,8 @@ async function pageLoad(){
     
     // nav buttons
     document.getElementById('togleNav').addEventListener('click', togleNav);
-    document.getElementById('navLinkInvite').addEventListener('click', togleNav);
-    document.getElementById('navLinksupport').addEventListener('click', togleNav);
-    document.getElementById('navLinkPremium').addEventListener('click', togleNav);
-    document.getElementById('navLinkScores').addEventListener('click', togleNav);
-    document.getElementById('navLinkUserScores').addEventListener('click', togleNav);
-    document.getElementById('navLinkPrivacy').addEventListener('click', togleNav);
-    document.getElementById('navLinkStatus').addEventListener('click', togleNav);
     document.getElementById('navLinkToggle').addEventListener('click', togleNav);
-
-
 }
-
 
 function togleNav(element) {
     const hide = element.srcElement.getAttribute("hide")
