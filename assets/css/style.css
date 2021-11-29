@@ -15,8 +15,6 @@ a:link, a:visited, a:hover {color:white;background-color: transparent;text-decor
 
 /* Section/Article */
 section, article, section > :last-child, section:last-child, article > :last-child, article:last-child {margin-bottom: 3em;margin-top: 3em;}
-.inactive{display: none;}
-.active{visibility: visible}
 
 
 
