@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Counting</title>
-        <meta name="title" content="Counting">
+        <meta name="title" content="Vote">
         <link rel="icon" href="/assets/img/CountingIconRound.png" type="image/x-icon"/>
         <meta name="description" content="The most customizable counting bot. Compete with other Discord servers to get the highest count.">
         <meta name="keywords" content="discord counting bot, counting bot, counting game, counting, counting discord">
@@ -29,7 +29,6 @@
         <!-- css imports -->
         <link href="/assets/css/Raleway.css" rel="stylesheet">
         <link href="/assets/css/style.css" rel="stylesheet">
-        <link href="/assets/css/fontawsome.css" rel="stylesheet">
 
         <!-- js imports -->
         <script type="application/javascript" async src="/assets/js/arcWidget.min.js"></script>
@@ -37,52 +36,11 @@
 	</head>
 
 	<body>  
-        <script type="application/javascript" async src="/assets/js/pageUtils.js"></script>
         <script>
-            // set golabl vars
-            let gloabldata = {
-                "scoresDataSortDirection": false,
-                "userscorestabledata": [],
-            };
-
-            // event listeners
-            // page load
-            document.addEventListener("DOMContentLoaded", pageLoad);
-            pageLoad()
-            
-            // headder, title adujust
-            async function pageLoad(){
-                const userscoresTableBody = document.getElementById("userScoresTableBody");
-                if (userscoresTableBody.getElementsByTagName("tr").length>0) return
-
-                const ajaxdata = await fetch(`https://api.numselli.xyz/counting/userscores`).catch(err=>console.error);
-                gloabldata.userscorestabledata = (await ajaxdata.json()).slice(0, 60)
-                gloabldata.userscorestabledata.forEach(async({correctnumbers, username, wrongnumbers}, index) => {
-                    const tr = document.createElement("tr")
-
-                    const rankNode = document.createElement("td")
-                    rankNode.innerHTML = index+1
-                    tr.appendChild(rankNode)
-
-                    const userNameNode = document.createElement("td")
-                    userNameNode.innerHTML = username;
-                    tr.appendChild(userNameNode);
-
-                    const scoresNode = document.createElement("td");
-                    scoresNode.innerHTML = formatNumber(correctnumbers+wrongnumbers);
-                    tr.appendChild(scoresNode);
-
-                    document.getElementById('userScoresTableBody').append(tr);
-                })
-            }
-
-            function imgError() {
-                if (this.src != 'assets/img/error.png') this.src = 'assets/img/error.png';
-            }
-            function formatNumber(num){
-                return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-            }
+            window.location.href = "https://discord.com/oauth2/authorize?client_id=726560538145849374&scope=bot%20applications.commands";
         </script>
+        <script type="application/javascript" async src="/assets/js/pageUtils.js"></script>
+
 
         <!-- Nav -->
         <div id="nav" class="topnav">
@@ -100,18 +58,10 @@
 
         <!-- Main -->
         <div id="main" style="height: 100%; width: 100%; margin: 0 auto;">
-            <article id="userscores" class="panel" style="width: 100%; margin: 0 auto;">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Rank</th>
-                            <th>Username</th>
-                            <th>Total</i></th>
-                        </tr>
-                    </thead>
-                    <tbody id='userScoresTableBody'>
-                    </tbody>
-                </table>
+            <article id="vote" class="panel" style="width: 100%; margin: 0 auto;">
+                <div style="margin-left: 1em; margin-right: 1em; margin-top: 10em;">
+                    <center><h2>Redirecting you to a voting site</h2></center>
+                </div>
             </article>
         </div>
 	</body>
