@@ -50,28 +50,35 @@
         </script>
         <script>
             // set golabl vars
-            let gloabldata = {
-                "scoresDataSortDirection": false,
-                "userscorestabledata": [],
-            };
+            let currentPage = 1
 
-            // event listeners
-            // page load
-            document.addEventListener("DOMContentLoaded", pageLoad);
-            pageLoad()
-            
-            // headder, title adujust
-            async function pageLoad(){
-                const userscoresTableBody = document.getElementById("userScoresTableBody");
-                if (userscoresTableBody.getElementsByTagName("tr").length>0) return
+            document.addEventListener("DOMContentLoaded", async()=>{
+                await loadMore(currentPage);
 
-                const ajaxdata = await fetch(`https://api.numselli.xyz/counting/userscores`).catch(err=>console.error);
-                gloabldata.userscorestabledata = (await ajaxdata.json()).slice(0, 60)
-                gloabldata.userscorestabledata.forEach(async({correctnumbers, username, wrongnumbers}, index) => {
+                const io = new IntersectionObserver(entries => {
+                    entries.map(async entry => {
+                        if (entry.intersectionRatio > 0.9) {
+                            currentPage+=1
+                            io.unobserve(entry.target);
+                            await loadMore(currentPage);
+                            io.observe(document.getElementById("userScoresTableBody").lastChild);
+                        }
+                    });
+                }, {
+                    rootMargin: "25px",
+                    threshold: 1.0
+                });
+
+                io.observe(document.getElementById("userScoresTableBody").lastChild);
+            });
+
+            async function loadMore(page){
+                const ajaxdata = await fetch(`https://api.numselli.xyz/counting/userscores?page=${page}`).catch(err=>console.error);
+                (await ajaxdata.json()).map(({correctnumbers, username, wrongnumbers}, index) => {
                     const tr = document.createElement("tr")
 
                     const rankNode = document.createElement("td")
-                    rankNode.innerHTML = index+1
+                    rankNode.innerHTML = (((page-1)*60)+index+1)
                     tr.appendChild(rankNode)
 
                     const userNameNode = document.createElement("td")
@@ -79,18 +86,11 @@
                     tr.appendChild(userNameNode);
 
                     const scoresNode = document.createElement("td");
-                    scoresNode.innerHTML = formatNumber(correctnumbers+wrongnumbers);
+                    scoresNode.innerHTML = (correctnumbers+wrongnumbers).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                     tr.appendChild(scoresNode);
 
                     document.getElementById('userScoresTableBody').append(tr);
                 })
-            }
-
-            function imgError() {
-                if (this.src != 'assets/img/error.png') this.src = 'assets/img/error.png';
-            }
-            function formatNumber(num){
-                return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
             }
         </script>
 
