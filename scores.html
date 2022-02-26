@@ -29,7 +29,6 @@
         <!-- css imports -->
         <link href="/assets/css/Raleway.css" rel="stylesheet">
         <link href="/assets/css/style.css" rel="stylesheet">
-        <link href="/assets/css/fontawsome.css" rel="stylesheet">
 
         <!-- js imports -->
         <script type="application/javascript" async src="/assets/js/arcWidget.min.js"></script>
@@ -43,29 +42,30 @@
 
 	<body>  
         <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const elems = document.querySelectorAll('.sidenav');
-                let instances = M.Sidenav.init(elems);
-            });
-        </script>
-        <script>
-            let gloabldata = {
-                "scorestabledata":[],
-                "scoresDataSortDirection": false,
-            };
-
             // event listeners
             document.addEventListener("DOMContentLoaded", async()=>{
-                document.getElementById('scoresSortCS').addEventListener('click', sortdata);
-                document.getElementById('scoresSortHS').addEventListener('click', sortdata);
+                const navElems = document.querySelectorAll('.sidenav');
+                let navInstances = M.Sidenav.init(navElems);
 
-                const scoresTableBody = document.getElementById("scoresTableBody");
-                if (scoresTableBody.getElementsByTagName("tr").length>0) return
+                const modeSelectElement = document.getElementById('modeSelect');
+                let Modeinstance = M.FormSelect.init(modeSelectElement, {});
+                console.log(Modeinstance)
+
+                const sortByElement = document.getElementById('sortBy');
+                let sortByElementInstance = M.FormSelect.init(sortByElement, {});
+                console.log(sortByElementInstance)
+
+
+                // when mode is switched
+
                 
-                const ajaxdata = await fetch(`https://api.numselli.xyz/counting/scores`).catch(err=>console.error);
-                gloabldata.scorestabledata = await ajaxdata.json() ?? undefined
+                load()
+            });
 
-                gloabldata.scorestabledata.map(({name, url, hs, last_num})=>{
+            async function load(){
+                
+                const ajaxdata = await fetch(`https://api.numselli.xyz/counting/scores?mode=${mode}&page=${page}&sortby=${sortBy}`).catch(err=>console.error);
+                (await ajaxdata.json()).map(({name, url, hs, last_num})=>{
                     const tr = document.createElement("tr")
                     tr.className="tr"
 
@@ -92,53 +92,6 @@
 
                     document.getElementById('scoresTableBody').append(tr)                
                 })
-            });
-
-            async function sortdata(column){
-                const name = column.target.getAttribute("name")
-
-                // flick sort arrow
-                const sortButtons = document.getElementsByClassName("sortbutton");
-                Array.from(sortButtons).map(sortButton=>{
-                    if (!sortButton.childNodes[1]) return
-                    if (sortButton.childNodes[1].id == name){
-                        gloabldata.scoresDataSortDirection = !gloabldata.scoresDataSortDirection;
-                        document.getElementById(name).classList = gloabldata.scoresDataSortDirection ? 'fa fa-sort-up' : 'fa fa-sort-down'
-                    }else sortButton.childNodes[1].classList="";
-                })
-
-                // sort data
-                gloabldata.scorestabledata.sort((p1, p2) => gloabldata.scoresDataSortDirection ? p1[name] - p2[name] : p2[name] - p1[name]);
-
-                // update table
-                let new_tbody = document.createElement('tbody');
-                new_tbody.id = "scoresTableBody"
-                gloabldata.scorestabledata.map(data=>{					
-                    let row = document.createElement("tr")
-                    row.className ="tr"
-                    
-                    let image = document.createElement('img')
-                    image.src = data.url
-                    image.className = 'guildimg'
-                    image.onerror=imgError
-                    row.appendChild(document.createElement("td").appendChild(image));
-
-                    const nameNode = document.createElement("td")
-                    nameNode.appendChild(document.createTextNode(data.name));
-                    row.appendChild(nameNode);
-
-                    const currentScoreNode = document.createElement("td")
-                    currentScoreNode.appendChild(document.createTextNode(data.last_num));
-                    row.appendChild(currentScoreNode);
-
-                    const highScoreNode = document.createElement("td")
-                    highScoreNode.appendChild(document.createTextNode(data.hs));
-                    row.appendChild(highScoreNode);
-
-                    new_tbody.appendChild(row);
-                })
-                const old_tbody = document.getElementById("scoresTableBody")
-                old_tbody.parentNode.replaceChild(new_tbody, old_tbody);
             }
 
             function imgError() {
@@ -179,13 +132,31 @@
         <!-- Main -->
         <div id="main" style="height: 100%; width: 100%; margin: 0 auto;">
             <article id="scores" class="panel" style="width: 100%; margin: 0 auto;">
+                <div>
+                    <div class="input-field col s12">
+                        <select id="modeSelect">
+                            <option value="1" selected>Option 1</option>
+                            <option value="2">Option 2</option>
+                            <option value="3">Option 3</option>
+                        </select>
+                        <label>Mode</label>
+                    </div>
+
+                    <div class="input-field col s12">
+                        <select id="sortBy">
+                            <option value="1" selected>Current Scores</option>
+                            <option value="2">High Scores</option>
+                        </select>
+                        <label>Sort By</label>
+                    </div>
+                </div>
                 <table>
                     <thead>
                         <tr>
                             <th class="sortbutton">Icon</th>
                             <th class="sortbutton">Name</th>
-                            <th id="scoresSortCS" class="sortbutton" dataType="int" name="last_num">Current Score <i id="last_num" class=""></i></th>
-                            <th id="scoresSortHS" class="sortbutton" dataType="int" name ="hs">High Score <i id="hs" class=""></i></th>
+                            <th class="sortbutton">Current Score</th>
+                            <th class="sortbutton">High Score</th>
                         </tr>
                     </thead>
                     <tbody id='scoresTableBody'>
