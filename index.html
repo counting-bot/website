@@ -42,36 +42,22 @@
     
 	<body>  
         <script>
-            document.addEventListener('DOMContentLoaded', function() {
+            document.addEventListener('DOMContentLoaded', async() => {
                 const elems = document.querySelectorAll('.sidenav');
                 let instances = M.Sidenav.init(elems);
-            });
-        </script>
-        <script>
-            const redircts = {
-                "scores": 'https://counting.numselli.xyz/scores',
-                "userscores": 'https://counting.numselli.xyz/userscores',
-                "status": 'https://counting.numselli.xyz/status',
-                "vote": 'https://counting.numselli.xyz/vote'
-            };
 
-            window.onload = async () => {
-                if (window.location.hash !== '') return window.location.href = redircts[window.location.hash.replace("#","").toLowerCase()];
-    
                 const ajaxdata = await fetch(`https://api.numselli.xyz/counting/stats`).catch(err=>console.error);
                 const {guilds, dbUsers, numbers} = await ajaxdata.json();
-                Promise.all(
-                    document.getElementById("guilds").textContent = await formatNumber(guilds),
-                    document.getElementById("dbUsers").textContent = await formatNumber(dbUsers),
-                    document.getElementById("numbersTotal").textContent = await formatNumber(numbers.total)
-                );
-            }
+                document.getElementById("guilds").textContent = formatNumber(guilds),
+                document.getElementById("dbUsers").textContent = formatNumber(dbUsers),
+                document.getElementById("numbersTotal").textContent = formatNumber(numbers.total)
+            });
 
-            async function formatNumber(num){
+            function formatNumber(num){
                 return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
             }
         </script>
-
+        
         <!-- Nav -->
         <nav>
             <div class="nav-wrapper">
@@ -107,29 +93,29 @@
             <article id="home" class="panel intro" style="width: 100%; height: 100%; text-align: center; margin: 0 !important;">
                 <div class="row" style="padding-top: 2.3%; padding-bottom: 4.3%;">
                     <div class="column blueBorder verticalAlign" style="height: 8.5rem;">
-                        <h2 id="guilds" class="homeStatTitle">000,000</h2>
-                        <h3 style="font-weight: bold; vertical-align: middle; ">Servers</h3>
+                        <h4 id="guilds" class="homeStatTitle">000,000</h2>
+                        <h5 style="font-weight: bold; vertical-align: middle; ">Servers</h3>
                     </div>
                     <div class="column blueBorder verticalAlign" style="height: 8.5rem;">
-                        <h2 id="dbUsers"class="homeStatTitle">000,000</h2>
-                        <h3 style="font-weight: bold;">Users</h3>
+                        <h4 id="dbUsers"class="homeStatTitle">000,000</h2>
+                        <h5 style="font-weight: bold;">Users</h3>
                     </div>
                     <div class="column blueBorder verticalAlign" style="height: 8.5rem;">
-                        <h2 id="numbersTotal" class="homeStatTitle">000,000</h2>
-                        <h3 style="font-weight: bold; vertical-align: middle;">Numbers Counted</h3>
+                        <h4 id="numbersTotal" class="homeStatTitle">000,000</h2>
+                        <h5 style="font-weight: bold; vertical-align: middle;">Numbers Counted</h3>
                     </div>
                 </div>
 
                 <div>
-                    <img src="https://discord.boats/api/widget/726560538145849374" alt="">
-                    <img src="https://discords.com/bots/api/bot/726560538145849374/widget" alt="">
-                    <img src="https://infinitybotlist.com/bots/726560538145849374/widget?size=small" alt="">
+                    <img src="https://discord.boats/api/widget/726560538145849374" alt="discord.boats widget">
+                    <img src="https://discords.com/bots/api/bot/726560538145849374/widget" alt="discords.com widget">
+                    <img src="https://infinitybots.gg/bots/726560538145849374/widget?size=small" alt="infinitybots.gg widget">
                 </div>
 
                 <div class="row">
                     <div class="column heading">
-                        <h2 class="homeStatTitle">About Counting</h2>
-                        <h3 style="font-weight: bold;">The most customizable counting bot. Compete with other Discord servers to get the highest count.<h3>
+                        <h3 class="homeStatTitle">About Counting</h2>
+                        <h4 style="font-weight: bold;">The most customizable counting bot. Compete with other Discord servers to get the highest count.<h3>
                     </div>
                 </div>
             </article>
