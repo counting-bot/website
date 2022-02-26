@@ -33,11 +33,21 @@
 
         <!-- js imports -->
         <script type="application/javascript" async src="/assets/js/arcWidget.min.js"></script>
-		<script type="application/javascript" async defer data-website-id="a82646c2-8bb3-4282-b185-2098b714f83a" src="https://insights.numselli.xyz/umami.js"></script>
-	</head>
+		<!-- <script type="application/javascript" async defer data-website-id="a82646c2-8bb3-4282-b185-2098b714f83a" src="https://insights.numselli.xyz/umami.js"></script> -->
+	
+        <!-- materialize -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" media="screen,projection">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    </head>
 
 	<body>  
-        <script type="application/javascript" async src="/assets/js/pageUtils.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const elems = document.querySelectorAll('.sidenav');
+                let instances = M.Sidenav.init(elems);
+            });
+        </script>
         <script>
             (async()=>{            
                 const ajaxdata = await fetch(`https://api.numselli.xyz/counting/stats`).catch(err=>console.error);
@@ -110,18 +120,33 @@
             }
         </script>
         <!-- Nav -->
-        <div id="nav" class="topnav">
-            <a href="/" hide='true' id="togleNav"><img hide='true' style="max-height: 1.7em;" width="25px" height="25px" alt="Counting's logo" src="/assets/img/CountingIconRound32x32.png"></a>
-            <a href="/invite.html" rel="nofollow noopener" target="_blank" id="navLinkInvite">Invite</a>
-            <a href="/support" rel="nofollow noopener" target="_blank" id="navLinksupport">Support</a>
-            <a href="https://donatebot.io/checkout/672259037861117964" rel="nofollow noopener" target="_blank" id="navLinkPremium">Premium</a>
-            <a href="/scores" id="navLinkScores">Scores</a>
-            <a href="/userscores" id="navLinkUserScores">User Scores</a>
-            <a href="/privacy" id="navLinkPrivacy">Privacy</a>
-            <a href="/status" id="navLinkStatus">Status</a>
-            <!-- <a style="float: right;display: block;">Login</a> -->
-            <a class="icon" id="navLinkToggle"><i class="fa fa-bars"></i></a>
-        </div>
+        <nav>
+            <div class="nav-wrapper">
+                <a href="/login" class="right">Login</a>
+                <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                <ul class="left hide-on-med-and-down">
+                    <li><a href="/" id="navLinkInvite">Home</a></li>
+                    <li><a href="/invite" id="navLinkInvite">Invite</a></li>
+                    <li><a href="/support">Support</a></li>
+                    <li><a href="https://donatebot.io/checkout/672259037861117964" rel="nofollow noopener" target="_blank" id="navLinkPremium">Premium</a></li>
+                    <li><a href="/scores" id="navLinkScores">Scores</a> </li>
+                    <li><a href="/userscores" id="navLinkUserScores">User Scores</a></li>
+                    <li><a href="/privacy" id="navLinkPrivacy">Privacy</a></li>
+                    <li><a href="/status" id="navLinkStatus">Status</a></ul>
+                </ul>
+            </div>
+        </nav>
+        
+        <ul class="sidenav" id="mobile-demo">
+            <li><a href="/" id="navLinkInvite">Home</a></li>
+            <li><a href="/invite">Invite</a></li>
+            <li><a href="/support">Support</a></li>
+            <li><a href="https://donatebot.io/checkout/672259037861117964" rel="nofollow noopener" target="_blank" id="navLinkPremium">Premium</a></li>
+            <li><a href="/scores" id="navLinkScores">Scores</a> </li>
+            <li><a href="/userscores" id="navLinkUserScores">User Scores</a></li>
+            <li><a href="/privacy" id="navLinkPrivacy">Privacy</a></li>
+            <li><a href="/status" id="navLinkStatus">Status</a>/li></ul>
+        </ul>
 
         <!-- Main -->
         <div id="main" style="height: 100%; width: 100%; margin: 0 auto;">
