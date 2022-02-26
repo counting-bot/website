@@ -55,11 +55,7 @@
             };
 
             // event listeners
-            document.addEventListener("DOMContentLoaded", pageLoad);
-            pageLoad()            
-            
-            async function pageLoad(){
-                document.getElementById('scoresSortName').addEventListener('click', sortdata);
+            document.addEventListener("DOMContentLoaded", async()=>{
                 document.getElementById('scoresSortCS').addEventListener('click', sortdata);
                 document.getElementById('scoresSortHS').addEventListener('click', sortdata);
 
@@ -96,7 +92,7 @@
 
                     document.getElementById('scoresTableBody').append(tr)                
                 })
-            }
+            });
 
             async function sortdata(column){
                 const name = column.target.getAttribute("name")
@@ -112,13 +108,7 @@
                 })
 
                 // sort data
-                const dataType = column.target.getAttribute("dataType")
-                gloabldata.scorestabledata.sort((p1, p2) => {
-                    return {
-                        "int": gloabldata.scoresDataSortDirection ? p1[name] - p2[name] : p2[name] - p1[name],
-                        "string": gloabldata.scoresDataSortDirection ? (p1[name] > p2[name]) - (p1[name] < p2[name]) : (p2[name] > p1[name]) - (p2[name] < p1[name])
-                    }[dataType]
-                });
+                gloabldata.scorestabledata.sort((p1, p2) => gloabldata.scoresDataSortDirection ? p1[name] - p2[name] : p2[name] - p1[name]);
 
                 // update table
                 let new_tbody = document.createElement('tbody');
@@ -193,7 +183,7 @@
                     <thead>
                         <tr>
                             <th class="sortbutton">Icon</th>
-                            <th id="scoresSortName" class="sortbutton" dataType="string" name="name">Name <i id="name" class=""></i></th>
+                            <th class="sortbutton">Name</th>
                             <th id="scoresSortCS" class="sortbutton" dataType="int" name="last_num">Current Score <i id="last_num" class=""></i></th>
                             <th id="scoresSortHS" class="sortbutton" dataType="int" name ="hs">High Score <i id="hs" class=""></i></th>
                         </tr>
