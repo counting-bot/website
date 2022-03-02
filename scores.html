@@ -38,6 +38,8 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" media="screen,projection">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+        <script type="module" src="/assets/js/navbar.js"></script>
     </head>
 
 	<body>  
@@ -55,15 +57,11 @@
                 let sortByElementInstance = M.FormSelect.init(sortByElement, {});
                 console.log(sortByElementInstance)
 
-
                 // when mode is switched
-
-                
                 load()
             });
 
             async function load(){
-                
                 const ajaxdata = await fetch(`https://api.numselli.xyz/counting/scores?mode=${mode}&page=${page}&sortby=${sortBy}`).catch(err=>console.error);
                 (await ajaxdata.json()).map(({name, url, hs, last_num})=>{
                     const tr = document.createElement("tr")
@@ -101,33 +99,9 @@
                 return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
             }
         </script>
-        <nav>
-            <div class="nav-wrapper">
-                <a href="/login" class="right">Login</a>
-                <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-                <ul class="left hide-on-med-and-down">
-                    <li><a href="/" id="navLinkInvite">Home</a></li>
-                    <li><a href="/invite" id="navLinkInvite">Invite</a></li>
-                    <li><a href="/support">Support</a></li>
-                    <li><a href="https://donatebot.io/checkout/672259037861117964" rel="nofollow noopener" target="_blank" id="navLinkPremium">Premium</a></li>
-                    <li><a href="/scores" id="navLinkScores">Scores</a> </li>
-                    <li><a href="/userscores" id="navLinkUserScores">User Scores</a></li>
-                    <li><a href="/privacy" id="navLinkPrivacy">Privacy</a></li>
-                    <li><a href="/status" id="navLinkStatus">Status</a></ul>
-                </ul>
-            </div>
-        </nav>
 
-        <ul class="sidenav" id="mobile-demo">
-            <li><a href="/" id="navLinkInvite">Home</a></li>
-            <li><a href="/invite">Invite</a></li>
-            <li><a href="/support">Support</a></li>
-            <li><a href="https://donatebot.io/checkout/672259037861117964" rel="nofollow noopener" target="_blank" id="navLinkPremium">Premium</a></li>
-            <li><a href="/scores" id="navLinkScores">Scores</a> </li>
-            <li><a href="/userscores" id="navLinkUserScores">User Scores</a></li>
-            <li><a href="/privacy" id="navLinkPrivacy">Privacy</a></li>
-            <li><a href="/status" id="navLinkStatus">Status</a>/li></ul>
-        </ul>
+        <!-- Nav -->
+        <nav-bar></nav-bar>
 
         <!-- Main -->
         <div id="main" style="height: 100%; width: 100%; margin: 0 auto;">
