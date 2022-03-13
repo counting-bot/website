@@ -48,6 +48,16 @@
                 const navElems = document.querySelectorAll('.sidenav');
                 let navInstances = M.Sidenav.init(navElems);
 
+                const userStats = await fetch(`https://api.numselli.xyz/discordOauth/userStats`, {credentials: "include"}).catch(err=>console.error);
+                const userStatsJSON =  await userStats.json()
+                document.getElementById("accuracy").innerText += userStatsJSON.accuracy
+                document.getElementById("correct").innerText += userStatsJSON.correct
+                document.getElementById("wrong").innerText += userStatsJSON.wrong
+                document.getElementById("total").innerText += userStatsJSON.total
+                document.getElementById("rank").innerText += userStatsJSON.rank
+                document.getElementById("savesLeft").innerText += `${userStatsJSON.savesLeft}/${userStatsJSON.maxSaves}`
+                document.getElementById("savesUsed").innerText += userStatsJSON.savesUsed
+
                 const ajaxdata = await fetch(`https://api.numselli.xyz/discordOauth/user`, {credentials: "include"}).catch(err=>console.error);
                 const ajaxdataJSON =  await ajaxdata.json()
                 document.getElementById('username').textContent = `${ajaxdataJSON.username}#${ajaxdataJSON.discriminator}`   
@@ -59,7 +69,7 @@
                     if (!guild.common && !guild.canInvite) return;
                     const linkDiv = document.createElement("a")
                     const guildDiv = document.createElement("div")
-                    linkDiv.href = guild.common ? `/guild/${guild.id}` : `https://discord.com/oauth2/authorize?client_id=726560538145849374&scope=bot%20applications.commands&guild_id=${guild.id}`
+                    linkDiv.href = guild.common ? `/guildScores?guildid=${guild.id}` : `https://discord.com/oauth2/authorize?client_id=726560538145849374&scope=bot%20applications.commands&guild_id=${guild.id}`
                     linkDiv.classList='card-panel transparent'
                     linkDiv.style= `text-align: center;`
 
@@ -87,7 +97,6 @@
                     nameNodeDiv.append(nameNode)
                     guildDiv.appendChild(nameNodeDiv)
 
-
                     linkDiv.appendChild(guildDiv)
 
                     document.getElementById("guildsDiv").appendChild(linkDiv)
@@ -97,9 +106,6 @@
             function imgError() {
                 if (this.src != 'assets/img/error.png') this.src = 'assets/img/error.png';
             }
-            // function formatNumber(num){
-            //     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-            // }
         </script>
 
         <!-- Nav -->
@@ -109,7 +115,6 @@
         <div id="main" style="height: 100%; width: 100%; margin: 0 auto;">
             <article id="scores" class="panel" style="width: 100%; margin: 0 auto;">
                 <div class="row">
-
                     <div class="col s2">
                         <div>
                             <img src="" alt="" id="avatar" style="border-radius: 50%;">
@@ -120,28 +125,26 @@
                         <div>
                             <span>Global Stats</span> 
                             <br>
-                            <span>Accuracy: 99.9%</span>
+                            <span id="accuracy">Accuracy: </span>
                             <br>
-                            <span>✅: 13,631</span>
+                            <span id="correct">✅: </span>
                             <br>
-                            <span>❌: 143</span>
+                            <span id="wrong">❌: </span>
                             <br>
-                            <span>Total: 13,774</span>
+                            <span id="total">Total: </span>
                             <br>
-                            <span>🆘 Saves left: 0/4</span>
+                            <span id="savesLeft">🆘 Saves left: </span>
                             <br>
-                            <span>🆘 Saves used: 29</span>
+                            <span id="savesUsed">🆘 Saves used: </span>
                             <br>
-                            <span>Rank: #5</span>
+                            <span id="rank">Rank: # </span>
                         </div>
                     </div>
                     <div class="col s9">
                         <div class="row" id="guildsDiv">
                         </div>
-
                     </div>
                 </div>
-
             </article>
         </div>
 	</body>
