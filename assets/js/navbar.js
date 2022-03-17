@@ -7,32 +7,32 @@ class MyComponent extends HTMLElement {
             <a class="dropdown-trigger right valign-wrapper" href="#!" data-target="dropdown1" id="userDropdown"></a>
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul class="left hide-on-med-and-down">
-                <li><a href="/" id="navLinkInvite">Home</a></li>
-                <li><a href="/invite.html" id="navLinkInvite">Invite</a></li>
+                <li><a href="/">Home</a></li>
+                <li><a href="/invite.html">Invite</a></li>
                 <li><a href="/support.html">Support</a></li>
-                <li><a href="https://donatebot.io/checkout/672259037861117964" rel="nofollow noopener" target="_blank" id="navLinkPremium">Premium</a></li>
-                <li><a href="/scores.html" id="navLinkScores">Scores</a> </li>
-                <li><a href="/userscores.html" id="navLinkUserScores">User Scores</a></li>
-                <li><a href="/privacy.html" id="navLinkPrivacy">Privacy</a></li>
-                <li><a href="/status.html" id="navLinkStatus">Status</a></ul>
+                <li><a href="/premium.html">Premium</a></li>
+                <li><a href="/scores.html">Scores</a> </li>
+                <li><a href="/userscores.html">User Scores</a></li>
+                <li><a href="/privacy.html">Privacy</a></li>
+                <li><a href="/status.html">Status</a></ul>
             </ul>
         </div>
     </nav>
 
-    <ul class="sidenav" id="mobile-demo">
-        <li><a href="/" id="navLinkInvite">Home</a></li>
-        <li><a href="/invite.html">Invite</a></li>
-        <li><a href="/support.html">Support</a></li>
-        <li><a href="https://donatebot.io/checkout/672259037861117964" rel="nofollow noopener" target="_blank" id="navLinkPremium">Premium</a></li>
-        <li><a href="/scores.html" id="navLinkScores">Scores</a> </li>
-        <li><a href="/userscores.html" id="navLinkUserScores">User Scores</a></li>
-        <li><a href="/privacy.html" id="navLinkPrivacy">Privacy</a></li>
-        <li><a href="/status.html" id="navLinkStatus">Status</a>/li></ul>
+    <ul class="sidenav black" id="mobile-demo">
+        <li><a href="/" class="white-text">Home</a></li>
+        <li><a href="/invite.html" class="white-text">Invite</a></li>
+        <li><a href="/support.html" class="white-text">Support</a></li>
+        <li><a href="/premium.html" class="white-text">Premium</a></li>
+        <li><a href="/scores.html" class="white-text">Scores</a> </li>
+        <li><a href="/userscores.html" class="white-text">User Scores</a></li>
+        <li><a href="/privacy.html" class="white-text">Privacy</a></li>
+        <li><a href="/status.html" class="white-text">Status</a></li>
     </ul>
-    <ul id="dropdown1" class="dropdown-content">
-        <li><a href="/user">Servers</a></li>
+    <ul id="dropdown1" class="dropdown-content black">
+        <li><a href="/user.html" class="white-text">Servers</a></li>
         <li class="divider"></li>
-        <li><a href="#!">Logout</a></li>
+        <li><a id="logoutButton" class="red-text darken-3">Logout</a></li>
     </ul>
     `;
         let element = document.createElement("link");
@@ -40,6 +40,11 @@ class MyComponent extends HTMLElement {
         element.href="/assets/css/materialize.min.css"
         element.media="screen,projection"
         this.appendChild(element);
+
+        document.getElementById("logoutButton").addEventListener("click", async event => {
+            const logoutRequest = await fetch("https://api.numselli.xyz/discordOauth/logout", {credentials: "include"})
+            if (logoutRequest.ok) window.location.pathname = "/"
+        })
 
         document.addEventListener('DOMContentLoaded', function() {
             let elems = document.querySelectorAll('.dropdown-trigger');
