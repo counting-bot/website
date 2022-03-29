@@ -4,55 +4,22 @@ html::-webkit-scrollbar {display: none;}
 html{-ms-overflow-style: none;}
 a:link, a:visited, a:hover {color:white;background-color: transparent;text-decoration: none;}
 
+.imageOverlay{
+    position: absolute !important;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+}
+
 /* Section/Article */
 section, article, section > :last-child, section:last-child, article > :last-child, article:last-child {margin-bottom: 3em;margin-top: 3em;}
 
-/* home page stats */
-.homeStatTitle {
-    font-weight: bold;
-}
-.heading {
-    padding: 20px 50px ;
-    text-align: center;
-}
-.title {
-    line-height: 50px ;
-    margin-bottom: 4px ;
-    font-size: 36px ;
-}
-.row {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-.column {
-    flex-basis: 100%;
-}
-@media screen and (min-width: 800px) {
-    .column {
-        flex: 1;
-   }
-}
-.blueBorder{
-    background-color: #6667f7;
-    border-radius: 30px;
-    margin: 1rem;
-    max-width: 450px;
-}
 
 /* scores tables */
 th, tr, td {
     text-align: center;
 }
-.verticalAlign{
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    flex-direction: column;
-}
 .guildimg{
-    border-radius: 50%;
     width:40px;
 }
 table {
@@ -88,9 +55,6 @@ tbody tr:hover {
     color: #555555;
     background-color: #f5f5f5;
 }
-thead tr:hover {
-    cursor: pointer;
-}
 
 /* status page */
 .shardStatusDiv{
@@ -114,13 +78,4 @@ thead tr:hover {
 .shardStatsdGrid{
     display: grid;
     grid-template-columns: auto auto;
-}
-
-
-
-.imageOverlay{
-    position: absolute !important;
-   top: 50%;
-   left: 50%;
-   transform: translate(-50%, -50%);
 }
