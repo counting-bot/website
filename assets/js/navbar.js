@@ -64,7 +64,7 @@ class MyComponent extends HTMLElement {
 
             const ajaxdataJSON = await ajaxdata.json()
             let dropDownArrowName = document.createElement("span")
-            dropDownArrowName.innerText=`${ajaxdataJSON.username}#${ajaxdataJSON.discriminator}`
+            dropDownArrowName.textContent=`${ajaxdataJSON.username}#${ajaxdataJSON.discriminator}`
             userDropdown.appendChild(dropDownArrowName)
 
             let dropDownArrowIMG = document.createElement("img")
@@ -76,7 +76,7 @@ class MyComponent extends HTMLElement {
        
             let dropDownArrow = document.createElement("i")
             dropDownArrow.classList = 'material-icons right'
-            dropDownArrow.innerText="arrow_drop_down"
+            dropDownArrow.textContent="arrow_drop_down"
             userDropdown.appendChild(dropDownArrow)
         })()
     }
