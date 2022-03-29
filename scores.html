@@ -43,26 +43,78 @@
 
 	<body>  
         <script>
+            let currentPage = 1
+
             // event listeners
             document.addEventListener("DOMContentLoaded", async()=>{
                 const navElems = document.querySelectorAll('.sidenav');
                 let navInstances = M.Sidenav.init(navElems);
 
+                const modes = await getFromAPI("countingmodes");
+                Object.keys(modes).map((key, index)=>{
+                    let option = document.createElement("option")
+                    option.value = key
+                    if (index==0)option.selected=true;
+                    option.textContent=modes[key]
+                    document.getElementById("modeSelect").appendChild(option)
+                })
+
                 const modeSelectElement = document.getElementById('modeSelect');
-                let Modeinstance = M.FormSelect.init(modeSelectElement, {});
-                console.log(Modeinstance)
+                let Modeinstance = M.FormSelect.init(modeSelectElement);
 
                 const sortByElement = document.getElementById('sortBy');
-                let sortByElementInstance = M.FormSelect.init(sortByElement, {});
-                console.log(sortByElementInstance)
+                let sortByElementInstance = M.FormSelect.init(sortByElement);
 
-                // when mode is switched
-                load()
+                modeSelectElement.addEventListener("change", ()=>{
+                    initTable(true)
+                    console.log("pp")
+                })
+                sortByElement.addEventListener("change", ()=>{
+                    initTable(true)
+                    console.log("pp")
+
+                })
+
+                initTable()
             });
 
-            async function load(){
-                const ajaxdata = await fetch(`https://api.numselli.xyz/counting/scores?mode=${mode}&page=${page}&sortby=${sortBy}`).catch(err=>console.error);
-                (await ajaxdata.json()).map(({name, url, hs, last_num})=>{
+            async function initTable(shouldReset){
+                if (shouldReset){
+                    const body = document.createElement("tbody")
+                    body.id = "scoresTableBody"
+
+                    document.getElementById("scoresTableBody").remove()
+                    document.getElementsByTagName("table")[0].appendChild(body)
+                }
+
+                // when mode is switched
+                await load(currentPage)
+
+                const io = new IntersectionObserver(entries => {
+                    entries.map(async entry => {
+                        if (entry.intersectionRatio > 0.9) {
+                            currentPage+=1
+                            io.unobserve(entry.target);
+                            await load(currentPage);
+                            io.observe(document.getElementById("scoresTableBody").lastChild);
+                        }
+                    });
+                }, {
+                    rootMargin: "25px",
+                    threshold: 1.0
+                });
+
+                io.observe(document.getElementById("scoresTableBody").lastChild);
+            }
+
+            async function load(page){
+                const mode = document.getElementById("modeSelect").value
+                console.log(mode)
+                const sortBy = document.getElementById("sortBy").value
+
+                const json = await getFromAPI(`scores/${mode}?page=${page}&sortby=${sortBy}`)
+
+                json.map(({name, url, hs, last_num})=>{
                     const tr = document.createElement("tr")
                     tr.className="tr"
 
@@ -97,6 +149,11 @@
             function formatNumber(num){
                 return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
             }
+            async function getFromAPI(route){
+                const ajaxdata = await fetch(`https://api.numselli.xyz/counting/${route}`);
+                if (!ajaxdata.ok) return;
+                return await ajaxdata.json()
+            }
         </script>
 
         <!-- Nav -->
@@ -108,17 +165,14 @@
                 <div>
                     <div class="input-field col s12">
                         <select id="modeSelect">
-                            <option value="1" selected>Option 1</option>
-                            <option value="2">Option 2</option>
-                            <option value="3">Option 3</option>
                         </select>
                         <label>Mode</label>
                     </div>
 
                     <div class="input-field col s12">
                         <select id="sortBy">
-                            <option value="1" selected>Current Scores</option>
-                            <option value="2">High Scores</option>
+                            <option value="hs" selected>Current Scores</option>
+                            <option value="current">High Scores</option>
                         </select>
                         <label>Sort By</label>
                     </div>
@@ -126,10 +180,10 @@
                 <table>
                     <thead>
                         <tr>
-                            <th class="sortbutton">Icon</th>
-                            <th class="sortbutton">Name</th>
-                            <th class="sortbutton">Current Score</th>
-                            <th class="sortbutton">High Score</th>
+                            <th>Icon</th>
+                            <th>Name</th>
+                            <th>Current Score</th>
+                            <th>High Score</th>
                         </tr>
                     </thead>
                     <tbody id='scoresTableBody'>
