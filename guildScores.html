@@ -1,0 +1,142 @@
+<!DOCTYPE HTML>
+<html lang="en">
+	<head>
+        <!-- Primary Meta Tags -->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Counting</title>
+        <meta name="title" content="Counting">
+        <link rel="icon" href="/assets/img/CountingIconRound.png" type="image/x-icon"/>
+        <meta name="description" content="The most customizable counting bot. Compete with other Discord servers to get the highest count.">
+        <meta name="keywords" content="discord counting bot, counting bot, counting game, counting, counting discord">
+        <meta name="theme-color" content="#a329d1">
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://counting.numselli.xyz">
+        <meta property="og:title" content="Counting">
+        <meta property="og:description" content="The most customizable counting bot. Compete with other Discord servers to get the highest count.">
+        <meta property="og:image" content="https://counting.numselli.xyz/assets/img/CountingIconRound.png">
+
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image">
+        <meta property="twitter:url" content="https://counting.numselli.xyz">
+        <meta property="twitter:title" content="Counting">
+        <meta property="twitter:description" content="The most customizable counting bot. Compete with other Discord servers to get the highest count.">
+        <meta property="twitter:image" content="https://counting.numselli.xyz/assets/img/CountingIconRound.png">
+
+        <!-- css imports -->
+        <link href="/assets/css/Raleway.css" rel="stylesheet">
+        <link href="/assets/css/style.css" rel="stylesheet">
+
+        <!-- js imports -->
+        <script type="application/javascript" async src="/assets/js/arcWidget.min.js"></script>
+		<!-- <script type="application/javascript" async defer data-website-id="a82646c2-8bb3-4282-b185-2098b714f83a" src="https://insights.numselli.xyz/umami.js"></script> -->
+	
+        <!-- materialize -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+        <script type="module" src="/assets/js/navbar.js"></script>
+    </head>
+
+	<body>  
+        <script>
+            // event listeners
+            document.addEventListener("DOMContentLoaded", async()=>{
+                const navElems = document.querySelectorAll('.sidenav');
+                let navInstances = M.Sidenav.init(navElems);
+
+                const queryParams = getQueryParams();
+                // console.log(queryParams.guildid)
+                await fetch(`https://api.numselli.xyz/discordOauth/guild/${queryParams.guildid}`)
+            })
+
+            const getQueryParams = () => {
+                let params = {}, pairs = document.URL.split('?').pop().split('&');
+
+                for (let i = 0, p; i < pairs.length; i++) {
+                    p = pairs[i].split('=');
+                    params[p[0]] =  p[1];
+                }     
+
+                return params;
+            };
+        </script>
+
+        <!-- Nav -->
+        <nav-bar></nav-bar>
+
+        <!-- Main -->
+        <div id="main" style="height: 100%; width: 100%; margin: 0 auto;">
+            <article id="scores" class="panel" style="width: 100%; margin: 0 auto;">
+                <div class="row">
+                    <div class="col s2">
+                        <div>
+                            <div>
+                                <h3>title HERE</h3>
+                            </div>
+                            <div>
+                                <a class="waves-effect waves-light btn">
+                                    <div class="valign-wrapper">
+                                        <!-- <span class="material-icons">tag</span> -->
+                                        <span>Sever overview</span>
+                                        <!-- <span class="material-icons">lock</span> -->
+                                    </div>
+                                </a>
+                            </div>
+                            <div>
+                                <a class="waves-effect waves-light btn">
+                                    <div class="valign-wrapper">
+                                        <span class="material-icons">tag</span>
+                                        <span>channel 1</span>
+                                        <span class="material-icons">lock</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div>
+                                <a class="waves-effect waves-light btn">
+                                    <div class="valign-wrapper">
+                                        <span class="material-icons">tag</span>
+                                        <span>channel 2</span>
+                                        <span class="material-icons">lock</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div>
+                                <a class="waves-effect waves-light btn">
+                                    <div class="valign-wrapper">
+                                        <span class="material-icons">tag</span>
+                                        <span>channel 3</span>
+                                        <span class="material-icons">lock</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div>
+                                <a class="waves-effect waves-light btn">
+                                    <div class="valign-wrapper">
+                                        <span class="material-icons">tag</span>
+                                        <span>channel 4</span>
+                                        <span class="material-icons">lock</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div>
+                                <a class="waves-effect waves-light btn">
+                                    <div class="valign-wrapper">
+                                        <span class="material-icons">tag</span>
+                                        <span>channel 5</span>
+                                        <span class="material-icons">lock</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s9">
+                        <!-- <div class="row" id="guildsDiv"></div> -->
+                    </div>
+                </div>
+            </article>
+        </div>
+	</body>
+</html>
