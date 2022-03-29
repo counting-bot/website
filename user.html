@@ -49,14 +49,16 @@
                 let navInstances = M.Sidenav.init(navElems);
 
                 const userStats = await fetch(`https://api.numselli.xyz/discordOauth/userStats`, {credentials: "include"}).catch(err=>console.error);
+                if (!userStats.ok) window.location.pathname = "/login";
+
                 const userStatsJSON =  await userStats.json()
-                document.getElementById("accuracy").innerText += userStatsJSON.accuracy
-                document.getElementById("correct").innerText += userStatsJSON.correct
-                document.getElementById("wrong").innerText += userStatsJSON.wrong
-                document.getElementById("total").innerText += userStatsJSON.total
-                document.getElementById("rank").innerText += userStatsJSON.rank
-                document.getElementById("savesLeft").innerText += `${userStatsJSON.savesLeft}/${userStatsJSON.maxSaves}`
-                document.getElementById("savesUsed").innerText += userStatsJSON.savesUsed
+                document.getElementById("accuracy").textContent +=` ${userStatsJSON.accuracy}`
+                document.getElementById("correct").textContent += ` ${userStatsJSON.correct}`
+                document.getElementById("wrong").textContent += ` ${userStatsJSON.wrong}`
+                document.getElementById("total").textContent += ` ${userStatsJSON.total}`
+                document.getElementById("rank").textContent += userStatsJSON.rank
+                document.getElementById("savesLeft").textContent += ` ${userStatsJSON.savesLeft}/${userStatsJSON.maxSaves}`
+                document.getElementById("savesUsed").textContent += ` ${userStatsJSON.savesUsed}`
 
                 const ajaxdata = await fetch(`https://api.numselli.xyz/discordOauth/user`, {credentials: "include"}).catch(err=>console.error);
                 const ajaxdataJSON =  await ajaxdata.json()
@@ -85,14 +87,14 @@
 
                     if (!guild.common){
                         const imgOverlayNodeDiv = document.createElement("div")
-                        imgOverlayNodeDiv.innerHTML = `<i class="medium material-icons">add_circle_outline</i>`
+                        imgOverlayNodeDiv.innerHTML = `<div class="btn-floating btn-large pulse"><i class="large material-icons">add_circle_outline</i></div>`
                         imgOverlayNodeDiv.classList="imageOverlay"
                         imgNodeDiv.appendChild(imgOverlayNodeDiv)
                     }
                     guildDiv.appendChild(imgNodeDiv)
 
                     const nameNode = document.createElement("span")
-                    nameNode.innerText = guild.name
+                    nameNode.textContent = guild.name
                     const nameNodeDiv = document.createElement("div")
                     nameNodeDiv.append(nameNode)
                     guildDiv.appendChild(nameNodeDiv)
@@ -120,29 +122,21 @@
                             <img src="" alt="" id="avatar" style="border-radius: 50%;">
                         </div>
                         <div>
-                            <span id="username"></span>
+                            <h5 id="username"></h5>
                         </div>
                         <div>
-                            <span>Global Stats</span> 
-                            <br>
-                            <span id="accuracy">Accuracy: </span>
-                            <br>
-                            <span id="correct">✅: </span>
-                            <br>
-                            <span id="wrong">❌: </span>
-                            <br>
-                            <span id="total">Total: </span>
-                            <br>
-                            <span id="savesLeft">🆘 Saves left: </span>
-                            <br>
-                            <span id="savesUsed">🆘 Saves used: </span>
-                            <br>
-                            <span id="rank">Rank: # </span>
+                            <h6>Global Stats</h6> 
+                            <div id="accuracy">Accuracy:</div>
+                            <div id="correct">✅:</div>
+                            <div id="wrong">❌:</div>
+                            <div id="total">Total:</div>
+                            <div id="savesLeft">🆘 Saves left:</div>
+                            <div id="savesUsed">🆘 Saves used:</div>
+                            <div id="rank">Rank: #</div>
                         </div>
                     </div>
                     <div class="col s9">
-                        <div class="row" id="guildsDiv">
-                        </div>
+                        <div class="row" id="guildsDiv"></div>
                     </div>
                 </div>
             </article>
