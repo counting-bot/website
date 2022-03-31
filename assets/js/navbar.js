@@ -32,7 +32,7 @@ class MyComponent extends HTMLElement {
     <ul id="dropdown1" class="dropdown-content black">
         <li><a href="/user.html" class="white-text">Servers</a></li>
         <li class="divider"></li>
-        <li><a id="logoutButton" class="red-text darken-3">Logout</a></li>
+        <li><a href="/logout.html"class="red-text darken-3">Logout</a></li>
     </ul>
     `;
         let element = document.createElement("link");
@@ -40,11 +40,6 @@ class MyComponent extends HTMLElement {
         element.href="/assets/css/materialize.min.css"
         element.media="screen,projection"
         this.appendChild(element);
-
-        document.getElementById("logoutButton").addEventListener("click", async event => {
-            const logoutRequest = await fetch("https://api.numselli.xyz/discordOauth/logout", {credentials: "include"})
-            if (logoutRequest.ok) window.location.pathname = "/"
-        })
 
         document.addEventListener('DOMContentLoaded', function() {
             let elems = document.querySelectorAll('.dropdown-trigger');
