@@ -70,8 +70,8 @@
                     if (!guild.common && !guild.canInvite) return;
                     const linkDiv = document.createElement("a")
                     const guildDiv = document.createElement("div")
-                    linkDiv.href = guild.common ? `/guildScores?guildid=${guild.id}` : `https://discord.com/oauth2/authorize?client_id=726560538145849374&scope=bot%20applications.commands&guild_id=${guild.id}`
-                    linkDiv.classList='card-panel transparent'
+                    linkDiv.href = guild.common ? `/guildScores.html?guildid=${guild.id}` : `https://discord.com/oauth2/authorize?client_id=726560538145849374&scope=bot%20applications.commands&guild_id=${guild.id}`
+                    linkDiv.classList='col card-panel transparent'
                     linkDiv.style= `text-align: center;`
 
                     const imgNode = document.createElement("img")
@@ -134,7 +134,7 @@
                             <div id="rank">Rank: #</div>
                         </div>
                     </div>
-                    <div class="col s9">
+                    <div class="col s10">
                         <div class="row" id="guildsDiv"></div>
                     </div>
                 </div>
