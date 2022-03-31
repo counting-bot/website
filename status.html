@@ -53,50 +53,87 @@
                 const status = await ajaxdata.json() ?? undefined
                 
                 status.clusters.map(cluster => {
-                    cluster.shardStats.map(shard => {
+                    cluster.shardStats.map((shard, index) => {
                         const shardNode = document.createElement("div");
                         shardNode.id=`shard_${cluster.id}`
-                        shardNode.classList='shardNode'
+                        shardNode.style.backgroundColor = '#1f1d1d'
+                        shardNode.style.padding = '0.5rem'
 
                         const shardTitle = document.createElement("div");
-                        shardTitle.classList="shardTitle"
+                        shardTitle.style.display="block"
                         const shardID = document.createElement("span")
                         shardID.innerHTML = `Shard #${shard.id}`
                         shardTitle.appendChild(shardID)
 
                         const shardStatusDiv = document.createElement("div");
-                        shardStatusDiv.style.backgroundColor = shardStatus(shard.status)
-                        shardStatusDiv.classList="shardStatusDiv"
+                        shardStatusDiv.style.height = "12px"
+                        shardStatusDiv.style.width = "12px"
+                        shardStatusDiv.style.backgroundColor = shardStatus[shard.status]
+
+                        shardStatusDiv.classList="right circle"
                         shardTitle.appendChild(shardStatusDiv)
                         shardNode.appendChild(shardTitle)
 
                         const ShardBody = document.createElement("div");
-                        ShardBody.classList="shardStatsdGrid"
+                        ShardBody.classList = "center-align container"
+
+                        const rowOne = document.createElement("div");
+                        rowOne.classList = "row"
 
                         const latencyDIV = document.createElement("div");
+                        latencyDIV.classList = "col s6"
                         const latencytext = document.createElement("span")
                         latencytext.innerHTML = "Latency: "
                         latencyDIV.appendChild(latencytext)
                         const latency = document.createElement("span")
                         latency.innerHTML = `${formatNumber(shard.latency)} MS`
                         latencyDIV.appendChild(latency)
-                        ShardBody.appendChild(latencyDIV)
+                        rowOne.appendChild(latencyDIV)
+
                         const guildsDIV = document.createElement("div");
+                        guildsDIV.classList = "col s6"
                         const guildsText = document.createElement("span")
                         guildsText.innerHTML = "Guilds: "
                         guildsDIV.appendChild(guildsText)
                         const guilds = document.createElement("span")
                         guilds.innerHTML = formatNumber(shard.guilds)
                         guildsDIV.appendChild(guilds)
-                        ShardBody.appendChild(guildsDIV)
+                        rowOne.appendChild(guildsDIV)
+
+                        ShardBody.appendChild(rowOne)
+
+
+
+
+
+                        const rowTwo = document.createElement("div");
+                        rowTwo.classList = "row"
+
                         const usersDIV = document.createElement("div");
+                        usersDIV.classList = "col s6"
+
                         const usersText = document.createElement("span")
                         usersText.innerHTML = "Users: "
                         usersDIV.appendChild(usersText)
                         const users = document.createElement("span")
                         users.innerHTML = formatNumber(shard.users)
                         usersDIV.appendChild(users)
-                        ShardBody.appendChild(usersDIV)
+                        rowTwo.appendChild(usersDIV)
+
+                        ShardBody.appendChild(rowTwo)
+
+                        // ShardBody.classList="shardStatsdGrid"
+
+                
+                
+                        // const usersDIV = document.createElement("div");
+                        // const usersText = document.createElement("span")
+                        // usersText.innerHTML = "Users: "
+                        // usersDIV.appendChild(usersText)
+                        // const users = document.createElement("span")
+                        // users.innerHTML = formatNumber(shard.users)
+                        // usersDIV.appendChild(users)
+                        // ShardBody.appendChild(usersDIV)
                         shardNode.appendChild(ShardBody)
 
                         document.getElementById("clsuterContainer").append(shardNode);
@@ -105,13 +142,11 @@
 
             })();
 
-            const shardStatus = (status)=>{
-                return {
-                    'disconnected': "#FF0000",
-                    'connecting': "#ff8000",
-                    'handshaking': "#ffff00",
-                    'ready': "#80ff00"
-                }[status]
+            const shardStatus = {
+                'disconnected': "#FF0000",
+                'connecting': "#ff8000",
+                'handshaking': "#ffff00",
+                'ready': "#80ff00"
             }
             
             function formatNumber(num){
@@ -125,9 +160,9 @@
         <!-- Main -->
         <div id="main" style="height: 100%; width: 100%; margin: 0 auto;">
             <article id="status" class="panel" style="width: 100%; margin: 0 auto;">
-                <div style="width: 50%; margin: 0 auto;">
-                    <div id="clsuterContainer" class="shardGrid"></div>
-                </div>
+                <!-- <div style="width: 50%; margin: 0 auto;"> -->
+                    <div id="clsuterContainer" class="shardGrid container"></div>
+                <!-- </div> -->
             </article>
         </div>
 	</body>

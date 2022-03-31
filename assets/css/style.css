@@ -4,15 +4,24 @@ html::-webkit-scrollbar {display: none;}
 html{-ms-overflow-style: none;}
 a:link, a:visited, a:hover {color:white;background-color: transparent;text-decoration: none;}
 
+/* invite bot overlay in user guild */
 .imageOverlay{
     position: absolute !important;
-   top: 50%;
-   left: 50%;
-   transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 /* Section/Article */
 section, article, section > :last-child, section:last-child, article > :last-child, article:last-child {margin-bottom: 3em;margin-top: 3em;}
+
+/* status page */
+.shardGrid{ 
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(344px, 1fr));
+    gap: 1.5rem;
+}
+
 
 
 /* scores tables */
@@ -54,28 +63,4 @@ tbody tr {
 tbody tr:hover {
     color: #555555;
     background-color: #f5f5f5;
-}
-
-/* status page */
-.shardStatusDiv{
-    height: 12px;
-    width: 12px;
-    border-radius: 50%;
-    float: right;    
-}
-.shardTitle{
-    display: block;
-}
-.shardNode{
-    background-color: #1f1d1d;
-    padding: 3px 10px;
-}
-.shardGrid{
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(344px, 1fr));
-    grid-gap: 5px;
-}
-.shardStatsdGrid{
-    display: grid;
-    grid-template-columns: auto auto;
 }
