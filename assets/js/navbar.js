@@ -3,8 +3,8 @@ class MyComponent extends HTMLElement {
         this.innerHTML = `    
     <nav>
         <div class="nav-wrapper black">
-            <a href="/login" class="right" id="login">Login</a>
-            <a class="dropdown-trigger right valign-wrapper" href="#!" data-target="dropdown1" id="userDropdown"></a>
+            <a href="/login.html" class="right" id="login">Login</a>
+            <div class="dropdown-trigger right valign-wrapper" data-target="dropdown1" id="userDropdown"></div>
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul class="left hide-on-med-and-down">
                 <li><a href="/">Home</a></li>
@@ -41,15 +41,14 @@ class MyComponent extends HTMLElement {
         element.media="screen,projection"
         this.appendChild(element);
 
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', async function() {
             let elems = document.querySelectorAll('.dropdown-trigger');
-            M.Dropdown.init(elems, {});
-        });
+            const dropdown = M.Dropdown.init(elems, {});
+            console.log(dropdown)
 
-
-        (async ()=>{
-            const ajaxdata = await fetch(`https://api.numselli.xyz/discordOauth/user`, {credentials: "include"}).catch(err=>console.error);
-            if (!ajaxdata.ok)return;
+            // user menu in nav bar
+            const ajaxdata = await fetch(`https://api.numselli.xyz/discordOauth/user`, {credentials: "include"}).catch(err=>{});
+            if (!ajaxdata?.ok)return;
             
             let loginDiv = document.getElementById("login")
             loginDiv.style.display = "none";
@@ -73,7 +72,7 @@ class MyComponent extends HTMLElement {
             dropDownArrow.classList = 'material-icons right'
             dropDownArrow.textContent="arrow_drop_down"
             userDropdown.appendChild(dropDownArrow)
-        })()
+        });
     }
 }
 
