@@ -5,40 +5,18 @@ html{-ms-overflow-style: none;}
 a:link, a:visited, a:hover {color:white;background-color: transparent;text-decoration: none;}
 
 /* invite bot overlay in user guild */
-.imageOverlay{
-    position: absolute !important;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
+.imageOverlay{position: absolute !important; top: 50%; left: 50%; transform: translate(-50%, -50%);}
 
 /* Section/Article */
 section, article, section > :last-child, section:last-child, article > :last-child, article:last-child {margin-bottom: 3em;margin-top: 3em;}
 
 /* status page */
-.shardGrid{ 
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(344px, 1fr));
-    gap: 1.5rem;
-}
+.shardGrid{ display: grid; grid-template-columns: repeat(auto-fill, minmax(344px, 1fr)); gap: 1.5rem;}
 
 /* scores tables */
-.guildimg{
-    width:40px;
-}
-table {
-    background: white;
-}
-table thead tr {
-    background: #36304a;
-}
-tbody tr:nth-child(even) {
-    background-color: #f5f5f5;
-}
-tbody tr {
-    color: #808080;
-}
-tbody tr:hover {
-    color: #555555;
-    background-color: #f5f5f5;
-}
+.guildimg{width:40px;}
+table {background: white;}
+table thead tr {background: #36304a;}
+tbody tr:nth-child(even) {background-color: #f5f5f5;}
+tbody tr {color: #808080;}
+tbody tr:hover {color: #555555; background-color: #f5f5f5;}
