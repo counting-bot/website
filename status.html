@@ -40,7 +40,7 @@
         <script type="application/javascript" async src="/assets/js/pageUtils.js"></script>
         <script>
             (async()=>{            
-                const ajaxdata = await fetch(`https://api.numselli.xyz/counting/stats`).catch(err=>console.error);
+                const ajaxdata = await fetch(`https://api.numselli.xyz/counting/shardStats`).catch(err=>console.error);
                 const status = await ajaxdata.json() ?? undefined
                 
                 status.clusters.map(cluster => {
