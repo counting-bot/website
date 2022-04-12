@@ -46,11 +46,11 @@
                 const elems = document.querySelectorAll('.sidenav');
                 let instances = M.Sidenav.init(elems);
 
-                const ajaxdata = await fetch(`https://api.numselli.xyz/counting/stats`).catch(err=>console.error);
-                const {guilds, dbUsers, numbers} = await ajaxdata.json();
+                const ajaxdata = await fetch(`https://api.numselli.xyz/counting/mainStats`).catch(err=>console.error);
+                const {guilds, dbUsers, total} = await ajaxdata.json();
                 document.getElementById("guilds").textContent = formatNumber(guilds),
                 document.getElementById("dbUsers").textContent = formatNumber(dbUsers),
-                document.getElementById("numbersTotal").textContent = formatNumber(numbers.total)
+                document.getElementById("numbersTotal").textContent = formatNumber(total)
             });
 
             function formatNumber(num){
