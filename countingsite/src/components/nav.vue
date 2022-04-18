@@ -9,23 +9,23 @@
               <li><router-link to="/invite">Invite</router-link></li>
               <li><router-link to="/support">Support</router-link></li>
                     <!-- <li><router-link to="/premium">Premium</router-link></li> -->
-              <!-- <li><a href="/scores.html">Scores</a> </li> -->
-              <!-- <li><a href="/userscores.html">User Scores</a></li> -->
+              <li><router-link to="/scores">Scores</router-link></li>
+              <li><router-link to="/userscores">User Scores</router-link></li>
               <li><router-link to="/privacy">Privacy</router-link></li>
-              <!-- <li><a href="/status.html">Status</a></li> -->
+              <li><router-link to="/status">Status</router-link></li>
           </ul>
       </div>
     </nav>
 
     <ul class="sidenav black" id="mobile-demo">
-        <!-- <li><a href="/" class="white-text">Home</a></li> -->
-        <!-- <li><a href="/invite.html" class="white-text">Invite</a></li> -->
-        <!-- <li><a href="/support.html" class="white-text">Support</a></li> -->
-        <!-- <li><a href="/premium.html" class="white-text">Premium</a></li> -->
-        <!-- <li><a href="/scores.html" class="white-text">Scores</a> </li> -->
-        <!-- <li><a href="/userscores.html" class="white-text">User Scores</a></li> -->
-        <!-- <li><a href="/privacy.html" class="white-text">Privacy</a></li> -->
-        <!-- <li><a href="/status.html" class="white-text">Status</a></li> -->
+        <li><router-link to="/">Home</router-link></li>
+        <li><router-link to="/invite">Invite</router-link></li>
+        <li><router-link to="/support">Support</router-link></li>
+            <!-- <li><router-link to="/premium">Premium</router-link></li> -->
+        <li><router-link to="/scores">Scores</router-link></li>
+        <li><router-link to="/userscores">User Scores</router-link></li>
+        <li><router-link to="/privacy">Privacy</router-link></li>
+        <li><router-link to="/status">Status</router-link></li>
     </ul>
     <ul id="dropdown1" class="dropdown-content black">
         <!-- <li><a href="/user.html" class="white-text">Servers</a></li> -->
