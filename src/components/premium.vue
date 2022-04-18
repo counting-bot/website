@@ -136,3 +136,4 @@
                 //                             <input type="hidden" name="custom" value='{"discord_user_id": {{ user_info.id }}, "discord_guild_id": {{ guild.id }}}'>
                 //                         </form> -->
             <!-- }) --> 
+            

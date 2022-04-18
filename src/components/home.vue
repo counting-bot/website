@@ -94,6 +94,7 @@ export default {
 }
 </script>
 
+
         <!-- 
         <meta name="keywords" content="discord counting bot, counting bot, counting game, counting, counting discord">
         <meta name="theme-color" content="#a329d1"> -->
