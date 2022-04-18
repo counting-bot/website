@@ -8,11 +8,3 @@ export default {
     }
 }
 </script>
-
-<!-- <!DOCTYPE HTML>
-	<body>  
-        <script>
-            window.location.href = "https://api.numselli.xyz/discordOauth/login";
-        </script>
-	</body>
-</html> -->

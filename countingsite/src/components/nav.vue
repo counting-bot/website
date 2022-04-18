@@ -1,9 +1,11 @@
 <template>
   <nav>
       <div class="nav-wrapper black">
-          <router-link to="/login" class="right" id="login">Login</router-link>
-          <div class="dropdown-trigger right valign-wrapper" data-target="dropdown1" id="userDropdown">
+          <router-link to="/login" :class="hideLogin()" id="login">Login</router-link>
+          <div :class="hideUserDrop()" data-target="dropdown1" id="userDropdown">
               <span>{{username}}#{{discriminator}}</span>
+              <img :src=avatarURL :alt=avatarAlt class="circle center-align">
+              <i class="material-icons right">arrow_drop_down</i>
           </div>
           <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
           <ul class="left hide-on-med-and-down">
@@ -30,46 +32,38 @@
         <li><router-link to="/status" class="white-text">Status</router-link></li>
     </ul>
     <ul id="dropdown1" class="dropdown-content black">
-        <!-- <li><a href="/user.html" class="white-text">Servers</a></li> -->
+        <li><a href="/user" class="white-text">Servers</a></li>
         <li class="divider"></li>
-        <!-- <li><a href="/logout.html" class="red-text darken-3">Logout</a></li> -->
+        <li><a href="/logout" class="red-text darken-3">Logout</a></li>
     </ul>
 </template>
 
 <script>
     import M from 'materialize-css'
 
+    const ajaxdata = await fetch(`https://api.numselli.xyz/discordOauth/user`, {credentials: "include"}).catch(err=>{});
+    const ajaxdataJSON = await ajaxdata?.json()??{}
+
     export default {
+        name: 'navbar',
+        data (){
+            return {
+                username: ajaxdataJSON.username,
+                discriminator: ajaxdataJSON.discriminator,
+                avatarURL: `${ajaxdataJSON.avatarURL}?size=32`,
+                avatarAlt: `${ajaxdataJSON.username}#${ajaxdataJSON.discriminator}`
+            }
+        },
         mounted () {
-        M.AutoInit()
-    },
-    name: 'navbar'
+            M.AutoInit()
+        },
+        methods:{
+            hideLogin(){
+                return ajaxdata?.ok ? "hide" : "right"
+            },
+            hideUserDrop(){
+                return ajaxdata?.ok ? "dropdown-trigger right valign-wrapper" :  "hide"
+            }
+        }
     }
-
-    // const ajaxdata = await fetch(`https://api.numselli.xyz/discordOauth/user`, {credentials: "include"}).catch(err=>{});
-    // const ajaxdataJSON = await ajaxdata.json()
-        
-    // let loginDiv = document.getElementById("login")
-    // loginDiv.style.display = "none";
-    
-    // const userDropdown = document.getElementById("userDropdown")
-
-
-    // let dropDownArrowName = document.createElement("span")
-
-    // <span>{{username}}#{{discriminator}}</span>
-    // dropDownArrowName.textContent=`${ajaxdataJSON.username}#${ajaxdataJSON.discriminator}`
-    // userDropdown.appendChild(dropDownArrowName)
-
-    // let dropDownArrowIMG = document.createElement("img")
-    // dropDownArrowIMG.src = `${ajaxdataJSON.avatarURL}?size=32`
-    // dropDownArrowIMG.alt = `${ajaxdataJSON.username}#${ajaxdataJSON.discriminator}`
-    // dropDownArrowIMG.classList = "center-align"
-    // dropDownArrowIMG.style = "border-radius: 50%; "
-    // userDropdown.appendChild(dropDownArrowIMG)
-
-    // let dropDownArrow = document.createElement("i")
-    // dropDownArrow.classList = 'material-icons right'
-    // dropDownArrow.textContent="arrow_drop_down"
-    // userDropdown.appendChild(dropDownArrow)
 </script>

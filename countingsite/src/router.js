@@ -10,6 +10,7 @@ import privacy from './components/privacy.vue'
 import status from './components/status.vue'
 import login from './components/login.vue'
 import logout from './components/logout.vue'
+import user from './components/user.vue'
 
 const routes = [
     {
@@ -51,6 +52,10 @@ const routes = [
     {
         path: '/logout',
         component: logout
+    },
+    {
+        path: '/user',
+        component: user
     },
 ]
 const router = createRouter({
