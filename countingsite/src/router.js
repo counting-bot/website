@@ -11,6 +11,7 @@ import status from './components/status.vue'
 import login from './components/login.vue'
 import logout from './components/logout.vue'
 import user from './components/user.vue'
+import guildscores from './components/guildscores.vue'
 
 const routes = [
     {
@@ -57,6 +58,10 @@ const routes = [
         path: '/user',
         component: user
     },
+    {
+        path: '/guildscores/:guildid',
+        component: guildscores
+    }
 ]
 const router = createRouter({
     history: createWebHistory(),
