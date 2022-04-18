@@ -17,15 +17,15 @@
       </div>
     </nav>
 
-    <ul class="sidenav black" id="mobile-demo">
-        <li><router-link to="/">Home</router-link></li>
-        <li><router-link to="/invite">Invite</router-link></li>
-        <li><router-link to="/support">Support</router-link></li>
-            <!-- <li><router-link to="/premium">Premium</router-link></li> -->
-        <li><router-link to="/scores">Scores</router-link></li>
-        <li><router-link to="/userscores">User Scores</router-link></li>
-        <li><router-link to="/privacy">Privacy</router-link></li>
-        <li><router-link to="/status">Status</router-link></li>
+    <ul class="sidenav black white-text" id="mobile-demo">
+        <li><router-link to="/" class="white-text">Home</router-link></li>
+        <li><router-link to="/invite" class="white-text">Invite</router-link></li>
+        <li><router-link to="/support" class="white-text">Support</router-link></li>
+            <!-- <li><router-link to="/premium" class="white-text">Premium</router-link></li> -->
+        <li><router-link to="/scores" class="white-text">Scores</router-link></li>
+        <li><router-link to="/userscores" class="white-text">User Scores</router-link></li>
+        <li><router-link to="/privacy" class="white-text">Privacy</router-link></li>
+        <li><router-link to="/status" class="white-text">Status</router-link></li>
     </ul>
     <ul id="dropdown1" class="dropdown-content black">
         <!-- <li><a href="/user.html" class="white-text">Servers</a></li> -->

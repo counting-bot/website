@@ -4,7 +4,7 @@ import home from './components/home.vue'
 import invite from './components/invite.vue'
 import support from './components/support.vue'
 import premium from './components/premium.vue'
-// scores
+import scores from './components/scores.vue'
 import userscores from './components/userscores.vue'
 import privacy from './components/privacy.vue'
 import status from './components/status.vue'
@@ -26,10 +26,10 @@ const routes = [
         path: '/premium',
         component: premium
     },
-    // {
-    //     path: '/scores',
-    //     component: scores
-    // },
+    {
+        path: '/scores',
+        component: scores
+    },
     {
         path: '/userscores',
         component: userscores

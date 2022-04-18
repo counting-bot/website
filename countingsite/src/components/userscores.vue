@@ -8,7 +8,7 @@
                     <th>Total</th>
                 </tr>
             </thead>
-            <tbody id='userScoresTableBody'>
+            <tbody>
                 <tr v-for="user in users" :key="user.first">
                     <td>{{user.rank}}</td>
                     <td>{{user.userName}}</td>
