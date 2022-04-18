@@ -1,8 +1,0 @@
-/* documnt */
-html, body{font-family: 'Nunito Sans';  background-color: #181818;color: #ffffff;overflow-x: hidden;margin:0;}
-html::-webkit-scrollbar {display: none;}
-html{-ms-overflow-style: none;}
-a:link, a:visited, a:hover {color:white;background-color: transparent;text-decoration: none;}
-
-/* Section/Article */
-section, article, section > :last-child, section:last-child, article > :last-child, article:last-child {margin-bottom: 3em;margin-top: 3em;}
