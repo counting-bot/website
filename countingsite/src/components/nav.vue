@@ -1,8 +1,10 @@
 <template>
   <nav>
       <div class="nav-wrapper black">
-          <!-- <a href="/login.html" class="right" id="login">Login</a> -->
-          <div class="dropdown-trigger right valign-wrapper" data-target="dropdown1" id="userDropdown"></div>
+          <router-link to="/login" class="right" id="login">Login</router-link>
+          <div class="dropdown-trigger right valign-wrapper" data-target="dropdown1" id="userDropdown">
+              <span>{{username}}#{{discriminator}}</span>
+          </div>
           <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
           <ul class="left hide-on-med-and-down">
               <li><router-link to="/">Home</router-link></li>
@@ -35,12 +37,39 @@
 </template>
 
 <script>
-import M from 'materialize-css'
+    import M from 'materialize-css'
 
-export default {
-    mounted () {
-    M.AutoInit()
-  },
-  name: 'navbar'
-}
+    export default {
+        mounted () {
+        M.AutoInit()
+    },
+    name: 'navbar'
+    }
+
+    // const ajaxdata = await fetch(`https://api.numselli.xyz/discordOauth/user`, {credentials: "include"}).catch(err=>{});
+    // const ajaxdataJSON = await ajaxdata.json()
+        
+    // let loginDiv = document.getElementById("login")
+    // loginDiv.style.display = "none";
+    
+    // const userDropdown = document.getElementById("userDropdown")
+
+
+    // let dropDownArrowName = document.createElement("span")
+
+    // <span>{{username}}#{{discriminator}}</span>
+    // dropDownArrowName.textContent=`${ajaxdataJSON.username}#${ajaxdataJSON.discriminator}`
+    // userDropdown.appendChild(dropDownArrowName)
+
+    // let dropDownArrowIMG = document.createElement("img")
+    // dropDownArrowIMG.src = `${ajaxdataJSON.avatarURL}?size=32`
+    // dropDownArrowIMG.alt = `${ajaxdataJSON.username}#${ajaxdataJSON.discriminator}`
+    // dropDownArrowIMG.classList = "center-align"
+    // dropDownArrowIMG.style = "border-radius: 50%; "
+    // userDropdown.appendChild(dropDownArrowIMG)
+
+    // let dropDownArrow = document.createElement("i")
+    // dropDownArrow.classList = 'material-icons right'
+    // dropDownArrow.textContent="arrow_drop_down"
+    // userDropdown.appendChild(dropDownArrow)
 </script>

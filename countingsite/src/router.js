@@ -8,6 +8,8 @@ import scores from './components/scores.vue'
 import userscores from './components/userscores.vue'
 import privacy from './components/privacy.vue'
 import status from './components/status.vue'
+import login from './components/login.vue'
+import logout from './components/logout.vue'
 
 const routes = [
     {
@@ -41,6 +43,14 @@ const routes = [
     {
         path: '/status',
         component: status
+    },
+    {
+        path: '/login',
+        component: login
+    },
+    {
+        path: '/logout',
+        component: logout
     },
 ]
 const router = createRouter({

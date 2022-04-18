@@ -26,8 +26,9 @@
             <tbody>
                 <tr v-for="guild in guilds" :key="guild.first">
                     <td>
-                        <img  v-if="guild.url" class="circle guildimg" :src=guild.url @error="$event.src='assets/img/error.png'" :alt=guild.name loading="lazy">
-                        <img v-else src="/assets/img/error.png" class="circle guildimg" alt=guild.name loading="lazy"/>
+                        <!-- <img  v-if="guild.url" class="circle guildimg" :src=guild.url @error="$event.src='assets/img/error.png'" :alt=guild.name loading="lazy">
+                        <img v-else src="/assets/img/error.png" class="circle guildimg" alt=guild.name loading="lazy"/> -->
+                        <img class="circle guildimg" :src=guild.url v-on:error="this.src='assets/img/error.png'" :alt=guild.name loading="lazy">
                     </td>
                     <td>{{guild.name}}</td>
                     <td>{{guild.last_num}}</td>
@@ -44,6 +45,7 @@
         name: 'userscores',
         data() {
             return {
+                // failed_image: false,
                 guilds: [],
                 page: 0,
             };
@@ -70,8 +72,17 @@
                         loadUsers()
                     }
                 }
-            }
+            },
+            // onImgError: function(event) {
+            //     this.failed_image = true;
+            // }
         },
+        // computed: {
+        //     cPicture: function() {
+        //         return this.failed_image ? "https://picsum.photos/500/300?image=4" : "https://pisum.photos/500/300?image=5";
+        //     },
+        // },
+
         beforeMount() {
             this.loadUsers();
         },

@@ -1,4 +1,6 @@
 import { createApp } from 'vue'
+import { createHead } from '@vueuse/head'
+
 import App from './App.vue'
 
 import 'materialize-css/dist/css/materialize.min.css'
@@ -7,4 +9,11 @@ import 'materialize-css/dist/css/materialize.min.css'
 
 import router from './router'
 
-createApp(App).use(router).mount('#app')
+const head = createHead()
+
+
+
+let page = createApp(App)
+page.use(head)
+page.use(router)
+page.mount('#app')
