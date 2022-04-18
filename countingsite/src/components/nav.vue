@@ -6,8 +6,8 @@
           <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
           <ul class="left hide-on-med-and-down">
               <li><router-link to="/">Home</router-link></li>
-              <!-- <li><a href="/invite.html">Invite</a></li> -->
-              <!-- <li><a href="/support.html">Support</a></li> -->
+              <li><router-link to="/invite">Invite</router-link></li>
+              <li><router-link to="/support">Support</router-link></li>
                     <!-- <li><router-link to="/premium">Premium</router-link></li> -->
               <!-- <li><a href="/scores.html">Scores</a> </li> -->
               <!-- <li><a href="/userscores.html">User Scores</a></li> -->
