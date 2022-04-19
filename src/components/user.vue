@@ -41,13 +41,14 @@
 </template>
 
 <script>
-    import M from 'materialize-css'
+    const rawGuilds = await fetch(`https://api.numselli.xyz/discordOauth/userGuilds`, {credentials: "include"}).catch(err=>console.error);
+    const guildsJson =  await rawGuilds.json()
 
     const userStats = await fetch(`https://api.numselli.xyz/discordOauth/userStats`, {credentials: "include"}).catch(err=>console.error);
     const userStatsJSON = await userStats.json()
 
     const ajaxdata = await fetch(`https://api.numselli.xyz/discordOauth/user`, {credentials: "include"}).catch(err=>console.error);
-    const ajaxdataJSON =  await ajaxdata.json()          
+    const ajaxdataJSON =  await ajaxdata.json()  
 
     export default {
         name: 'user',
@@ -69,8 +70,6 @@
             }
         },
         async mounted () {
-            const rawGuilds = await fetch(`https://api.numselli.xyz/discordOauth/userGuilds`, {credentials: "include"}).catch(err=>console.error);
-            const guildsJson =  await rawGuilds.json()
             guildsJson.map(guild=>{
                 if (!guild.common && !guild.canInvite) return;
                 this.guilds.push({

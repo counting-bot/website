@@ -114,7 +114,7 @@
                     option.value = key
                     if (index==0)option.selected=true;
                     option.textContent=modes[key]
-                    document.getElementById("modeSelect").appendChild(option)
+                    countingsite/document.getElementById("modeSelect").appendChild(option)
                 })
 
                 const modeSelectElement = document.getElementById('modeSelect');
@@ -173,4 +173,3 @@
               <object :data="guild.iconURL" type="image/png" :alt="guild.name" loading="lazy" :class='grayscale(guild)' style="border-radius: 50%">
                                 <img src="/assets/img/error.png" alt="Not found image" :class='grayscale(guild)' style='border-radius: 50%'>
                             </object> -->
-                            

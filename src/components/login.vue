@@ -2,7 +2,7 @@
 
 <script>
 export default {
-  name: 'support',
+  name: 'login',
     created() {
         window.location.href = 'https://api.numselli.xyz/discordOauth/login';
     }

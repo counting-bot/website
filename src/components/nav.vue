@@ -1,12 +1,12 @@
 <template>
   <nav>
       <div class="nav-wrapper black">
-          <!-- <router-link to="/login" :class="hideLogin()" id="login">Login</router-link>
+          <router-link to="/login" :class="hideLogin()" id="login">Login</router-link>
           <div :class="hideUserDrop()" data-target="dropdown1" id="userDropdown">
               <span>{{username}}#{{discriminator}}</span>
               <img :src=avatarURL :alt=avatarAlt class="circle center-align">
               <i class="material-icons right">arrow_drop_down</i>
-          </div> -->
+          </div>
           <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
           <ul class="left hide-on-med-and-down">
               <li><router-link to="/">Home</router-link></li>
@@ -39,11 +39,8 @@
 </template>
 
 <script>
-    import M from 'materialize-css'
-
     const ajaxdata = await fetch(`https://api.numselli.xyz/discordOauth/user`, {credentials: "include"}).catch(err=>{});
     const ajaxdataJSON = await ajaxdata?.json()??{}
-
     export default {
         name: 'navbar',
         data (){
@@ -53,9 +50,6 @@
                 avatarURL: `${ajaxdataJSON.avatarURL}?size=32`,
                 avatarAlt: `${ajaxdataJSON.username}#${ajaxdataJSON.discriminator}`
             }
-        },
-        mounted () {
-            M.AutoInit()
         },
         methods:{
             hideLogin(){
