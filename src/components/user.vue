@@ -44,8 +44,6 @@
     import M from 'materialize-css'
 
     const userStats = await fetch(`https://api.numselli.xyz/discordOauth/userStats`, {credentials: "include"}).catch(err=>console.error);
-    if (!userStats.ok) window.location.pathname = "/login";
-
     const userStatsJSON = await userStats.json()
 
     const ajaxdata = await fetch(`https://api.numselli.xyz/discordOauth/user`, {credentials: "include"}).catch(err=>console.error);
