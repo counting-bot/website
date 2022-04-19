@@ -1,0 +1,134 @@
+<!DOCTYPE HTML>
+<html lang="en">
+	<head>
+        <!-- Primary Meta Tags -->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Counting</title>
+        <meta name="title" content="Counting">
+        <link rel="icon" href="/assets/img/CountingIconRound.png" type="image/x-icon"/>
+        <meta name="description" content="The most customizable counting bot. Compete with other Discord servers to get the highest count.">
+        <meta name="keywords" content="discord counting bot, counting bot, counting game, counting, counting discord">
+        <meta name="theme-color" content="#a329d1">
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://counting.numselli.xyz">
+        <meta property="og:title" content="Counting">
+        <meta property="og:description" content="The most customizable counting bot. Compete with other Discord servers to get the highest count.">
+        <meta property="og:image" content="https://counting.numselli.xyz/assets/img/CountingIconRound.png">
+
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image">
+        <meta property="twitter:url" content="https://counting.numselli.xyz">
+        <meta property="twitter:title" content="Counting">
+        <meta property="twitter:description" content="The most customizable counting bot. Compete with other Discord servers to get the highest count.">
+        <meta property="twitter:image" content="https://counting.numselli.xyz/assets/img/CountingIconRound.png">
+
+
+        <!-- css imports -->
+        <link href="/assets/css/Raleway.css" rel="stylesheet">
+        <link href="/assets/css/style.css" rel="stylesheet">
+
+        <!-- js imports -->
+		<!-- <script type="application/javascript" async defer data-website-id="a82646c2-8bb3-4282-b185-2098b714f83a" src="https://insights.numselli.xyz/umami.js"></script> -->
+	
+        <!-- materialize -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+        <script type="module" src="/assets/js/navbar.js"></script>
+    </head>
+
+	<body>  
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const elems = document.querySelectorAll('.sidenav');
+                let instances = M.Sidenav.init(elems);
+            });
+        </script>
+        <script>
+            (async()=>{            
+                const ajaxdata = await fetch(`https://api.numselli.xyz/counting/stats`).catch(err=>console.error);
+                const status = await ajaxdata.json() ?? undefined
+                
+                status.clusters.map(cluster => {
+                    cluster.shardStats.map(shard => {
+                        const shardNode = document.createElement("div");
+                        shardNode.id=`shard_${cluster.id}`
+                        shardNode.classList='shardNode'
+
+                        const shardTitle = document.createElement("div");
+                        shardTitle.classList="shardTitle"
+                        const shardID = document.createElement("span")
+                        shardID.innerHTML = `Shard #${shard.id}`
+                        shardTitle.appendChild(shardID)
+
+                        const shardStatusDiv = document.createElement("div");
+                        shardStatusDiv.style.backgroundColor = shardStatus(shard.status)
+                        shardStatusDiv.classList="shardStatusDiv"
+                        shardTitle.appendChild(shardStatusDiv)
+                        shardNode.appendChild(shardTitle)
+
+                        const ShardBody = document.createElement("div");
+                        ShardBody.classList="shardStatsdGrid"
+
+                        const latencyDIV = document.createElement("div");
+                        const latencytext = document.createElement("span")
+                        latencytext.innerHTML = "Latency: "
+                        latencyDIV.appendChild(latencytext)
+                        const latency = document.createElement("span")
+                        latency.innerHTML = `${formatNumber(shard.latency)} MS`
+                        latencyDIV.appendChild(latency)
+                        ShardBody.appendChild(latencyDIV)
+                        const guildsDIV = document.createElement("div");
+                        const guildsText = document.createElement("span")
+                        guildsText.innerHTML = "Guilds: "
+                        guildsDIV.appendChild(guildsText)
+                        const guilds = document.createElement("span")
+                        guilds.innerHTML = formatNumber(shard.guilds)
+                        guildsDIV.appendChild(guilds)
+                        ShardBody.appendChild(guildsDIV)
+                        const usersDIV = document.createElement("div");
+                        const usersText = document.createElement("span")
+                        usersText.innerHTML = "Users: "
+                        usersDIV.appendChild(usersText)
+                        const users = document.createElement("span")
+                        users.innerHTML = formatNumber(shard.users)
+                        usersDIV.appendChild(users)
+                        ShardBody.appendChild(usersDIV)
+                        shardNode.appendChild(ShardBody)
+
+                        document.getElementById("clsuterContainer").append(shardNode);
+                    })
+                })
+
+            })();
+
+            const shardStatus = (status)=>{
+                return {
+                    'disconnected': "#FF0000",
+                    'connecting': "#ff8000",
+                    'handshaking': "#ffff00",
+                    'ready': "#80ff00"
+                }[status]
+            }
+            
+            function formatNumber(num){
+                return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+            }
+        </script>
+
+        <!-- Nav -->
+        <nav-bar></nav-bar>
+
+        <!-- Main -->
+        <div id="main" style="height: 100%; width: 100%; margin: 0 auto;">
+            <article id="status" class="panel" style="width: 100%; margin: 0 auto;">
+                <div style="width: 50%; margin: 0 auto;">
+                    <div id="clsuterContainer" class="shardGrid"></div>
+                </div>
+            </article>
+        </div>
+	</body>
+</html>

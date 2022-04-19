@@ -33,31 +33,26 @@
         <link href="/assets/css/style.css" rel="stylesheet">
 
         <!-- js imports -->
-        <script type="application/javascript" async src="/assets/js/arcWidget.min.js"></script>
         <!-- <script type="application/javascript" async defer data-website-id="a82646c2-8bb3-4282-b185-2098b714f83a" src="https://insights.numselli.xyz/umami.js"></script> -->
 
         <!-- materialize -->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
-        <link rel="stylesheet" href="/assets/css/materialize.min.css" media="screen,projection">
-
-        <!-- <script type="module" src="/assets/js/navbar.js"></script> -->
+        <script type="module" src="/assets/js/navbar.js"></script>
     </head>
 
     <body>
-        <div id="nav" class="topnav">
-            <a href="/" hide='true' id="togleNav"><img hide='true' style="max-height: 1.7em;" width="25px" height="25px" alt="Counting's logo" src="/assets/img/CountingIconRound32x32.png"></a>
-            <a href="/invite.html" rel="nofollow noopener" target="_blank" id="navLinkInvite">Invite</a>
-            <a href="/support" rel="nofollow noopener" target="_blank" id="navLinksupport">Support</a>
-            <a href="/premium" id="navLinkPremium">Premium</a>
-            <a href="/scores" id="navLinkScores">Scores</a>
-            <a href="/userscores" id="navLinkUserScores">User Scores</a>
-            <a href="/privacy" id="navLinkPrivacy">Privacy</a>
-            <a href="/status" id="navLinkStatus">Status</a>
-            <!-- <a style="float: right;display: block;">Login</a> -->
-            <a class="icon" id="navLinkToggle"><i class="fa fa-bars"></i></a>
-        </div>
+        <script>
+            // event listeners
+            document.addEventListener("DOMContentLoaded", async () => {
+                const navElems = document.querySelectorAll('.sidenav');
+                let navInstances = M.Sidenav.init(navElems);
+            })
+        </script>
+
+        <!-- Nav -->
+        <nav-bar></nav-bar>
 
         <!-- Main -->
         <div id="main" style="height: 100%; width: 100;">

@@ -1,0 +1,116 @@
+<!DOCTYPE HTML>
+<html lang="en">
+	<head>
+        <!-- Primary Meta Tags -->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Counting</title>
+        <meta name="title" content="Counting">
+        <link rel="icon" href="/assets/img/CountingIconRound.png" type="image/x-icon"/>
+        <meta name="description" content="The most customizable counting bot. Compete with other Discord servers to get the highest count.">
+        <meta name="keywords" content="discord counting bot, counting bot, counting game, counting, counting discord">
+        <meta name="theme-color" content="#a329d1">
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://counting.numselli.xyz">
+        <meta property="og:title" content="Counting">
+        <meta property="og:description" content="The most customizable counting bot. Compete with other Discord servers to get the highest count.">
+        <meta property="og:image" content="https://counting.numselli.xyz/assets/img/CountingIconRound.png">
+
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image">
+        <meta property="twitter:url" content="https://counting.numselli.xyz">
+        <meta property="twitter:title" content="Counting">
+        <meta property="twitter:description" content="The most customizable counting bot. Compete with other Discord servers to get the highest count.">
+        <meta property="twitter:image" content="https://counting.numselli.xyz/assets/img/CountingIconRound.png">
+
+
+        <!-- css imports -->
+        <link href="/assets/css/Raleway.css" rel="stylesheet">
+        <link href="/assets/css/style.css" rel="stylesheet">
+
+        <!-- js imports -->
+		<!-- <script type="application/javascript" async defer data-website-id="a82646c2-8bb3-4282-b185-2098b714f83a" src="https://insights.numselli.xyz/umami.js"></script> -->
+	
+        <!-- materialize -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+        <script type="module" src="/assets/js/navbar.js"></script>
+    </head>
+
+	<body>  
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const elems = document.querySelectorAll('.sidenav');
+                let instances = M.Sidenav.init(elems);
+            });
+        </script>
+        <script>
+            // set golabl vars
+            let currentPage = 1
+
+            document.addEventListener("DOMContentLoaded", async()=>{
+                await loadMore(currentPage);
+
+                const io = new IntersectionObserver(entries => {
+                    entries.map(async entry => {
+                        if (entry.intersectionRatio > 0.9) {
+                            currentPage+=1
+                            io.unobserve(entry.target);
+                            await loadMore(currentPage);
+                            io.observe(document.getElementById("userScoresTableBody").lastChild);
+                        }
+                    });
+                }, {
+                    rootMargin: "25px",
+                    threshold: 1.0
+                });
+
+                io.observe(document.getElementById("userScoresTableBody").lastChild);
+            });
+
+            async function loadMore(page){
+                const ajaxdata = await fetch(`https://api.numselli.xyz/counting/userscores?page=${page}`).catch(err=>console.error);
+                (await ajaxdata.json()).map(({correctnumbers, username, wrongnumbers}, index) => {
+                    const tr = document.createElement("tr")
+
+                    const rankNode = document.createElement("td")
+                    rankNode.innerHTML = (((page-1)*60)+index+1)
+                    tr.appendChild(rankNode)
+
+                    const userNameNode = document.createElement("td")
+                    userNameNode.innerHTML = username;
+                    tr.appendChild(userNameNode);
+
+                    const scoresNode = document.createElement("td");
+                    scoresNode.innerHTML = (correctnumbers+wrongnumbers).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    tr.appendChild(scoresNode);
+
+                    document.getElementById('userScoresTableBody').append(tr);
+                })
+            }
+        </script>
+
+        <!-- Nav -->
+        <nav-bar></nav-bar>
+
+        <!-- Main -->
+        <div id="main" style="height: 100%; width: 100%; margin: 0 auto;">
+            <article id="userscores" class="panel" style="width: 100%; margin: 0 auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Username</th>
+                            <th>Total</i></th>
+                        </tr>
+                    </thead>
+                    <tbody id='userScoresTableBody'>
+                    </tbody>
+                </table>
+            </article>
+        </div>
+	</body>
+</html>
