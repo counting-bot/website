@@ -1,22 +1,22 @@
 <template>
   <div class="container">
     <div class="row center" style="padding-top: 2.3%; padding-bottom: 4.3%;">
-      <div class="col s4 light-blue accent-3" style="height: 8.5rem; border-radius: 30px;">
+      <div class="col s4 deep-purple darken-2" style="height: 8.5rem; border-radius: 30px;">
         <h4 id="guilds" style="font-weight: bold;">{{ guildCount }}</h4>
 
         <h5 style="font-weight: bold; vertical-align: middle; ">Servers</h5>
       </div>
-      <div class="col s4 light-blue accent-3" style="height: 8.5rem; border-radius: 30px;">
+      <div class="col s4 deep-purple darken-2" style="height: 8.5rem; border-radius: 30px;">
         <h4 id="dbUsers" style="font-weight: bold;">{{ userCount }}</h4>
         <h5 style="font-weight: bold;">Users</h5>
       </div>
-      <div class="col s4 light-blue accent-3" style="height: 8.5rem; border-radius: 30px;">
+      <div class="col s4 deep-purple darken-2" style="height: 8.5rem; border-radius: 30px;">
         <h4 id="numbersTotal" style="font-weight: bold;">{{ numberCount }}</h4>
         <h5 style="font-weight: bold; vertical-align: middle;">Numbers Counted</h5>
       </div>
     </div>
 
-    <div class="center">
+    <!-- <div class="center">
       <img
         src="https://discords.com/bots/api/bot/726560538145849374/widget"
         alt="discords.com widget"
@@ -25,7 +25,7 @@
         src="https://infinitybots.gg/bots/726560538145849374/widget?size=small"
         alt="infinitybots.gg widget"
       />
-    </div>
+    </div> -->
 
     <div class="row">
       <h3 class="homeStatTitle heading center-align">About Counting</h3>

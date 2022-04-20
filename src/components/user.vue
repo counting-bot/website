@@ -2,10 +2,10 @@
   <div class="row">
         <div class="col s2">
             <div class="container">
-                <img :src=avatarURL :alt=avatarAlt id="avatar" class="circle">
+                <img :src=avatarURL :alt=username id="avatar" class="circle">
             </div>
             <div class="container">
-                <h5>{{username}}#{{discriminator}}</h5>
+                <h5>{{username}}</h5>
             </div>
             <div class="container">
                 <h6>Global Stats</h6> 
@@ -41,35 +41,43 @@
 </template>
 
 <script>
-    const rawGuilds = await fetch(`https://api.numselli.xyz/discordOauth/userGuilds`, {credentials: "include"}).catch(err=>console.error);
-    const guildsJson =  await rawGuilds.json()
-
-    const userStats = await fetch(`https://api.numselli.xyz/discordOauth/userStats`, {credentials: "include"}).catch(err=>console.error);
-    const userStatsJSON = await userStats.json()
-
-    const ajaxdata = await fetch(`https://api.numselli.xyz/discordOauth/user`, {credentials: "include"}).catch(err=>console.error);
-    const ajaxdataJSON =  await ajaxdata.json()  
-
     export default {
         name: 'user',
         data (){
             return {
-                username: ajaxdataJSON.username,
-                discriminator: ajaxdataJSON.discriminator,
-                avatarURL: ajaxdataJSON.avatarURL,
-                avatarAlt: `${ajaxdataJSON.username}#${ajaxdataJSON.discriminator}`,
-                accuracy: userStatsJSON.accuracy,
-                correct: userStatsJSON.correct,
-                wrong: userStatsJSON.wrong,
-                total: userStatsJSON.total,
-                savesLeft: userStatsJSON.savesLeft,
-                maxSaves: userStatsJSON.maxSaves,
-                savesUsed: userStatsJSON.savesUsed,
-                rank: userStatsJSON.rank,
+                avatarURL: "",
+                username: "",
+                accuracy: "",
+                correct: "",
+                wrong: "",
+                total: "",
+                savesLeft: "",
+                maxSaves: "",
+                savesUsed: "",
+                rank: "",
                 guilds:[]
             }
         },
         async mounted () {
+            const rawGuilds = await fetch(`https://api.numselli.xyz/discordOauth/userGuilds`, {credentials: "include"}).catch(err=>console.error);
+            const guildsJson = rawGuilds.ok ? await rawGuilds.json() : {}
+
+            const ajaxdata = await fetch(`https://api.numselli.xyz/discordOauth/user`, {credentials: "include"}).catch(err=>console.error);
+            const ajaxdataJSON = ajaxdata.ok ? await ajaxdata.json() : {}
+            this.avatarURL = ajaxdataJSON.avatarURL
+            this.username = `${ajaxdataJSON.username}#${ajaxdataJSON.discriminator}`
+
+            const userStats = await fetch(`https://api.numselli.xyz/discordOauth/userStats`, {credentials: "include"}).catch(err=>console.error);
+            const userStatsJSON = userStats.ok ? await userStats.json() : {}
+            this.accuracy = userStatsJSON.accuracy
+            this.correct = userStatsJSON.correct
+            this.wrong = userStatsJSON.wrong
+            this.total = userStatsJSON.total
+            this.savesLeft = userStatsJSON.savesLeft
+            this.maxSaves = userStatsJSON.maxSaves
+            this.savesUsed = userStatsJSON.savesUsed
+            this.rank = userStatsJSON.rank
+
             guildsJson.map(guild=>{
                 if (!guild.common && !guild.canInvite) return;
                 this.guilds.push({
