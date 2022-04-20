@@ -2,11 +2,11 @@
   <nav>
       <div class="nav-wrapper black">
           <router-link to="/login" :class="hideLogin()" id="login">Login</router-link>
-          <a class="dropdown-trigger" :class="hideUserDrop()" data-target="dropdown1" id="userDropdown">
-              <span>{{username}}</span>
-              <img :src=avatarURL :alt=username class="circle center-align">
-              <i class="material-icons right">arrow_drop_down</i>
-          </a>
+          <div class="dropdown-trigger" ref="dropdown" :class="hideUserDrop()" data-target="dropdown1" id="userDropdown">
+                <img :src=avatarURL :alt=username class="circle left-align">
+                <span class="center-align">{{username}}</span>
+                <i class="material-icons right-align">arrow_drop_down</i>
+          </div>
           <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
           <ul class="left hide-on-med-and-down">
             <li><router-link to="/">Home</router-link></li>
@@ -49,6 +49,8 @@
             }
         },
         async mounted () {
+            M.Dropdown.init(this.$refs.dropdown, {coverTrigger: false})
+     
             const ajaxdata = await fetch(`https://api.numselli.xyz/discordOauth/user`, {credentials: "include"}).catch(err=>{});
             const ajaxdataJSON = ajaxdata.ok ? await ajaxdata.json() : {}
 
