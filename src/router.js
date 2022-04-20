@@ -11,7 +11,7 @@ import status from './components/status.vue'
 import login from './components/login.vue'
 import logout from './components/logout.vue'
 import user from './components/user.vue'
-import guildscores from './components/guildscores.vue'
+import server from './components/server.vue'
 
 const routes = [
     {
@@ -59,8 +59,12 @@ const routes = [
         component: user
     },
     {
-        path: '/guildscores/:guildid',
-        component: guildscores
+        path: '/server/:guildid',
+        component: server
+    },
+    {
+        path: '/server/:guildid/:channelid',
+        component: server
     }
 ]
 const router = createRouter({

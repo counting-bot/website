@@ -12,17 +12,20 @@
                         </div>
                     <!-- </div> -->
                     <div v-for="channel in channels" :key="channel.first" class="waves-effect waves-light btn">
-                        <div class="valign-wrapper">
+                        <router-link :to="/server/${guildID}/${channel.id}" class="valign-wrapper">
                             <span class="material-icons">tag {{lock}}</span>
                             <span>{{channel.name}}</span>
-                        </div>
+                        </router-link>
+                        <!-- <div class="valign-wrapper"> -->
+                        <!-- </div> -->
                     </div>
                 </div>
             </div>
         </div>
         <div class="col s9">
             <!-- <div class="row"> -->
-                <guildStats/>
+                <!-- <guildStats :guildID=guildID></guildStats> -->
+                    <router-view></router-view>
 
             <!-- </div> -->
         </div>
@@ -30,31 +33,33 @@
 </template>
 
 <script>
-    import guildStats from './guildStats.vue'
+    import guildStats from './serverStats.vue'
 
     export default {
-        name: 'guildScores',
+        name: 'server',
         data(){
             return {
                 guildName: "",
                 lock: "",
-                channels:[]
+                channels:[],
+                guildID:"",
             }
         },
         async mounted(){
-                const guildData = await fetch(`https://api.numselli.xyz/discordOauth/guild/${this.$route.params.guildid}`, {credentials: "include"})
-                const guildDataJson = await guildData.json()
+            this.guildID = this.$route.params.guildid
+            const guildData = await fetch(`https://api.numselli.xyz/discordOauth/guild/${this.$route.params.guildid}`, {credentials: "include"})
+            const guildDataJson = await guildData.json()
 
-                const user = await fetch(`https://api.numselli.xyz/discordOauth/user`, {credentials: "include"})
-                const userJson = await user.json()
+            const user = await fetch(`https://api.numselli.xyz/discordOauth/user`, {credentials: "include"})
+            const userJson = await user.json()
 
-                this.guildName = guildDataJson.name
-                this.channels = guildDataJson.chanels
-                this.lock = userJson.mfa_enabled ? "lock" : ""
-                // this.channels = guildDataJson.channels
+            this.guildName = guildDataJson.name
+            this.channels = guildDataJson.chanels
+            this.lock = userJson.mfa_enabled ? "lock" : ""
+            // this.channels = guildDataJson.channels
 
-                // const guildData = await fetch(`https://api.numselli.xyz/discordOauth/guild/${this.$route.params.guildid}`, {credentials: "include"})
-                // const guildDataJson = await guildData.json()
+            // const guildData = await fetch(`https://api.numselli.xyz/discordOauth/guild/${this.$route.params.guildid}`, {credentials: "include"})
+            // const guildDataJson = await guildData.json()
         },
         methods:{
            

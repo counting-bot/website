@@ -10,7 +10,10 @@
             <span>accruacay</span>
             <br>
             <span>% contrubeuted to total numbers</span>
-
+            <br>
+            <span>guildID: {{guildID}}</span>
+            <br>
+            <span>channelID: {{channelID}}</span>
         </div>
 
         <table class="striped centered highlight">
@@ -34,12 +37,16 @@
 
 <script>
     export default {
-        name: 'userscores',
+        name: 'serverscores',
+        props: ["guildID", "channelID"],
         data() {
             return {
                 users: [],
                 page: 0,
             };
+        },
+        mounted(){
+            console.log(this.$route.params)
         },
         methods: {
             async loadUsers() {
