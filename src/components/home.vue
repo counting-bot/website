@@ -1,16 +1,16 @@
 <template>
   <div class="container">
     <div class="row center" style="padding-top: 2.3%; padding-bottom: 4.3%;">
-      <div class="col s4 deep-purple darken-2" style="height: 8.5rem; border-radius: 30px;">
+      <div class="col s12 m4 deep-purple darken-2" style="height: 8.5rem; border-radius: 30px;">
         <h4 id="guilds" style="font-weight: bold;">{{ guildCount }}</h4>
 
         <h5 style="font-weight: bold; vertical-align: middle; ">Servers</h5>
       </div>
-      <div class="col s4 deep-purple darken-2" style="height: 8.5rem; border-radius: 30px;">
+      <div class="col s12 m4 deep-purple darken-2" style="height: 8.5rem; border-radius: 30px;">
         <h4 id="dbUsers" style="font-weight: bold;">{{ userCount }}</h4>
         <h5 style="font-weight: bold;">Users</h5>
       </div>
-      <div class="col s4 deep-purple darken-2" style="height: 8.5rem; border-radius: 30px;">
+      <div class="col s12 m4 deep-purple darken-2" style="height: 8.5rem; border-radius: 30px;">
         <h4 id="numbersTotal" style="font-weight: bold;">{{ numberCount }}</h4>
         <h5 style="font-weight: bold; vertical-align: middle;">Numbers Counted</h5>
       </div>
