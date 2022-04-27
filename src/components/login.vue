@@ -4,7 +4,8 @@
 export default {
   name: 'login',
     created() {
-        window.location.href = 'https://api.numselli.xyz/discordOauth/login';
+      console.log(this.$route.params)
+        window.location.href = 'https://api.numselli.xyz/discordOauth/login?redirect_to='+this.$route.params.pageOrgin;
     }
 }
 </script>

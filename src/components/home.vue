@@ -1,32 +1,22 @@
 <template>
   <div class="container">
-    <div class="row center" style="padding-top: 2.3%; padding-bottom: 4.3%;">
-      <div class="col s12 m4 deep-purple darken-2" style="height: 8.5rem; border-radius: 30px;">
+    <div class="row center" style="padding-top: 2.3%; padding-bottom: 17%;">
+      <div class="col s12 m4 deep-purple darken-2" style="border-radius: 30px;">
         <h4 id="guilds" style="font-weight: bold;">{{ guildCount }}</h4>
-
+        <span class="deep-purple-text text-darken-2">a</span>
         <h5 style="font-weight: bold; vertical-align: middle; ">Servers</h5>
       </div>
-      <div class="col s12 m4 deep-purple darken-2" style="height: 8.5rem; border-radius: 30px;">
+      <div class="col s12 m4 deep-purple darken-2" style="border-radius: 30px;">
         <h4 id="dbUsers" style="font-weight: bold;">{{ userCount }}</h4>
+        <span class="deep-purple-text text-darken-2">a</span>
         <h5 style="font-weight: bold;">Users</h5>
       </div>
-      <div class="col s12 m4 deep-purple darken-2" style="height: 8.5rem; border-radius: 30px;">
+      <div class="col s12 m4 deep-purple darken-2" style="border-radius: 30px;">
         <h4 id="numbersTotal" style="font-weight: bold;">{{ numberCount }}</h4>
+        <span>Accuracy: {{accuracy}}</span>
         <h5 style="font-weight: bold; vertical-align: middle;">Numbers Counted</h5>
       </div>
     </div>
-
-    <!-- <div class="center">
-      <img
-        src="https://discords.com/bots/api/bot/726560538145849374/widget"
-        alt="discords.com widget"
-      />
-      <img
-        src="https://infinitybots.gg/bots/726560538145849374/widget?size=small"
-        alt="infinitybots.gg widget"
-      />
-    </div> -->
-
     <div class="row">
       <h3 class="homeStatTitle heading center-align">About Counting</h3>
       <h4
@@ -58,7 +48,8 @@ export default {
     return {
       guildCount: formatNumber(guilds),
       userCount: formatNumber(dbUsers),
-      numberCount: formatNumber(numbers?.total)
+      numberCount: formatNumber(numbers.total),
+      accuracy: `${((numbers.correct / numbers.total)*100).toFixed(2)}%`
     }
   },
   setup() {

@@ -37,16 +37,13 @@
 
 <script>
     export default {
-        name: 'serverscores',
+        name: 'serverStats',
         props: ["guildID", "channelID"],
         data() {
             return {
                 users: [],
                 page: 0,
             };
-        },
-        mounted(){
-            console.log(this.$route.params)
         },
         methods: {
             async loadUsers() {
@@ -72,7 +69,13 @@
         beforeMount() {
             this.loadUsers();
         },
-        mounted() {
+        mounted(props) {
+            console.log(props)
+            if (!props.channelID){
+                console.log("showing guild stats")
+            }else{
+                console.log("showing channel stats")
+            }
             this.getNextUser()
         }
     }

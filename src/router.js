@@ -47,7 +47,7 @@ const routes = [
         component: status
     },
     {
-        path: '/login',
+        path: '/login:pageOrgin',
         component: login
     },
     {
@@ -63,7 +63,7 @@ const routes = [
         component: server
     },
     {
-        path: '/server/:guildid/:channelid',
+        path: '/server/:guildid/:channelID',
         component: server
     }
 ]

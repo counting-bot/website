@@ -2,13 +2,13 @@
   <div class="row">
         <div class="col s2">
             <div class="container">
-                <img :src=avatarURL :alt=username id="avatar" class="circle">
-            </div>
+                </div>
             <div class="container">
-                <h5>{{username}}</h5>
+                <img :src=avatarURL :alt=username id="avatar" class="circle" style=" display:block;margin:auto;">
+                <h5 class="center-align">{{username}}</h5>
             </div>
-            <div class="container">
-                <h6>Global Stats</h6> 
+            <div class="container" style="text-align: center;">
+                <!-- <h6>Global Stats</h6>  -->
                 <div>Accuracy: {{accuracy}}</div>
                 <div>✅: {{correct}}</div>
                 <div>❌: {{wrong}}</div>

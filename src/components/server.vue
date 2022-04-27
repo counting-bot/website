@@ -12,28 +12,26 @@
                         </div>
                     <!-- </div> -->
                     <div v-for="channel in channels" :key="channel.first" class="waves-effect waves-light btn">
-                        <router-link :to="/server/${guildID}/${channel.id}" class="valign-wrapper">
+                        <!-- <a :href="'/server/'+guildID+'/'+channel.channelid" class="valign-wrapper">
                             <span class="material-icons">tag {{lock}}</span>
                             <span>{{channel.name}}</span>
-                        </router-link>
-                        <!-- <div class="valign-wrapper"> -->
-                        <!-- </div> -->
+                        </a> -->
+                        <div class="valign-wrapper" @click="change(guildID, channel.channelid)">
+                            <span class="material-icons">tag {{lock}}</span>
+                            <span>{{channel.name}}</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col s9">
-            <!-- <div class="row"> -->
-                <!-- <guildStats :guildID=guildID></guildStats> -->
-                    <router-view></router-view>
-
-            <!-- </div> -->
+            <serverStats :guildID=guildID :channelID=channelID></serverStats>
         </div>
     </div>
 </template>
 
 <script>
-    import guildStats from './serverStats.vue'
+    import serverStats from './serverStats.vue'
 
     export default {
         name: 'server',
@@ -43,10 +41,13 @@
                 lock: "",
                 channels:[],
                 guildID:"",
+                channelID: ""
             }
         },
         async mounted(){
             this.guildID = this.$route.params.guildid
+            this.channelID = this.$route.params.channelID
+
             const guildData = await fetch(`https://api.numselli.xyz/discordOauth/guild/${this.$route.params.guildid}`, {credentials: "include"})
             const guildDataJson = await guildData.json()
 
@@ -61,11 +62,8 @@
             // const guildData = await fetch(`https://api.numselli.xyz/discordOauth/guild/${this.$route.params.guildid}`, {credentials: "include"})
             // const guildDataJson = await guildData.json()
         },
-        methods:{
-           
-        },
-         components: {
-            guildStats
+        components: {
+            serverStats
         }
     }
 </script>
