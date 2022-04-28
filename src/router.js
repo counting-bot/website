@@ -47,7 +47,11 @@ const routes = [
         component: status
     },
     {
-        path: '/login:pageOrgin',
+        path: '/login/:pageOrgin',
+        component: login
+    },
+    {
+        path: '/login',
         component: login
     },
     {
