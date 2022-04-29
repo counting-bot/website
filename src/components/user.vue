@@ -8,7 +8,6 @@
                 <h5 class="center-align">{{username}}</h5>
             </div>
             <div class="container" style="text-align: center;">
-                <!-- <h6>Global Stats</h6>  -->
                 <div>Accuracy: {{accuracy}}</div>
                 <div>✅: {{correct}}</div>
                 <div>❌: {{wrong}}</div>
