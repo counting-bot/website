@@ -2,14 +2,14 @@
     <div class="container">
         <div class='row'>
             <div class="col s6">
-                <select ref="modeSelect" class="browser-default" v-model="defualtMode">
+                <select ref="modeSelect" class="browser-default" v-model="defualtMode" @change="updateScores($event)">
                     <option v-for="mode in modes" :value="mode.value">{{mode.text}}</option>
                 </select>
                 <label>Mode</label>
             </div>
 
             <div class="col s6">
-                <select ref="sortBy" class="browser-default">
+                <select ref="sortBy" class="browser-default" @change="updateScores($event)">
                     <option value="hs" selected>Current Scores</option>
                     <option value="current">High Scores</option>
                 </select>
@@ -61,6 +61,10 @@
                 this.modes=Object.keys(modesJSON).map(key=>{
                     return {value:key, text: modesJSON[key]}
                 })
+            },
+            updateScores(event){
+                this.guilds=[]
+                this.loadGuilds()
             },
             async loadGuilds() {
                 const mode = this.$refs.modeSelect.value || 0
