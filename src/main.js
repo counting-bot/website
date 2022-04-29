@@ -11,9 +11,4 @@ import router from './router'
 
 const head = createHead()
 
-
-
-let page = createApp(App)
-page.use(head)
-page.use(router)
-page.mount('#app')
+createApp(App).use(head).use(router).mount('#app')

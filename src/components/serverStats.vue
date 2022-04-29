@@ -71,7 +71,7 @@
         },
         mounted(props) {
             console.log(props)
-            if (!props.channelID){
+            if (!props?.channelID){
                 console.log("showing guild stats")
             }else{
                 console.log("showing channel stats")

@@ -4,7 +4,10 @@
 <script>
 export default {
   name: 'support',
-    created() {
+    async created() {
+      const userStats = await fetch(`https://api.numselli.xyz/discordOauth/user`, {credentials: "include"})
+      if (userStats.status === 401) return window.location.href = `https://api.numselli.xyz/discordOauth/login?redirect_to=vote`; 
+
       const votingSites = [
         "https://top.gg/bot/726560538145849374/vote",
         "https://discordbotlist.com/bots/counting-1881/upvote",

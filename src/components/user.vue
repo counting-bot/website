@@ -8,7 +8,6 @@
                 <h5 class="center-align">{{username}}</h5>
             </div>
             <div class="container" style="text-align: center;">
-                <!-- <h6>Global Stats</h6>  -->
                 <div>Accuracy: {{accuracy}}</div>
                 <div>✅: {{correct}}</div>
                 <div>❌: {{wrong}}</div>
@@ -59,13 +58,14 @@
             }
         },
         async mounted () {
-            const rawGuilds = await fetch(`https://api.numselli.xyz/discordOauth/userGuilds`, {credentials: "include"}).catch(err=>console.error);
-            const guildsJson = rawGuilds.ok ? await rawGuilds.json() : {}
-
             const ajaxdata = await fetch(`https://api.numselli.xyz/discordOauth/user`, {credentials: "include"}).catch(err=>console.error);
+            if (ajaxdata.status === 401) return window.location.href = `https://api.numselli.xyz/discordOauth/login?redirect_to=user`; 
             const ajaxdataJSON = ajaxdata.ok ? await ajaxdata.json() : {}
             this.avatarURL = ajaxdataJSON.avatarURL
             this.username = `${ajaxdataJSON.username}#${ajaxdataJSON.discriminator}`
+
+            const rawGuilds = await fetch(`https://api.numselli.xyz/discordOauth/userGuilds`, {credentials: "include"}).catch(err=>console.error);
+            const guildsJson = rawGuilds.ok ? await rawGuilds.json() : {}
 
             const userStats = await fetch(`https://api.numselli.xyz/discordOauth/userStats`, {credentials: "include"}).catch(err=>console.error);
             const userStatsJSON = userStats.ok ? await userStats.json() : {}
