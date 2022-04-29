@@ -12,6 +12,7 @@ import login from './components/login.vue'
 import logout from './components/logout.vue'
 import user from './components/user.vue'
 import server from './components/server.vue'
+import vote from './components/vote.vue'
 
 const routes = [
     {
@@ -45,6 +46,10 @@ const routes = [
     {
         path: '/status',
         component: status
+    },
+    {
+        path: '/vote',
+        component: vote
     },
     {
         path: '/login/:pageOrgin',
