@@ -23,7 +23,7 @@
                 <a v-for="guild in guilds" :key="guild.first" class="col card-panel transparen" :href="guild.common ? `/server/${guild.id}` : `https://discord.com/oauth2/authorize?client_id=726560538145849374&scope=bot%20applications.commands&permissions=3136&guild_id=${guild.id}`" style="text-align: center;">
                     <div>
                         <div style="position: relative;">
-                            <object :data="guild.iconURL" type="image/png" :alt="guild.name" loading="lazy" :class='grayscale(guild)' style="border-radius: 50%">
+                            <object :data="guild.iconURL" type="image/png" :aria-label="guild.name" loading="lazy" :class='grayscale(guild)' style="border-radius: 50%">
                                 <img src="/assets/img/error.png" alt="Not found image" :class='grayscale(guild)' style='border-radius: 50%'>
                             </object>
                             <div>

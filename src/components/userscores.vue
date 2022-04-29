@@ -17,6 +17,11 @@
             </tbody>
         </table>
     </div>
+   <div class="fixed-action-btn">
+        <button class="btn-floating btn-large waves-effect deep-purple darken-2" @click="scrollToTop">
+            <i class="large material-icons">expand_less</i>
+        </button>
+    </div>
 </template>
 
 <script>
@@ -29,6 +34,9 @@
             };
         },
         methods: {
+            scrollToTop() {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            },
             async loadUsers() {
                 const ajaxdata = await fetch(`https://api.numselli.xyz/counting/userscores?page=${this.page}`).catch(err=>console.error);
                 (await ajaxdata.json()).map(({correctnumbers, username, wrongnumbers}, index) => {
@@ -44,7 +52,7 @@
                     let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
                     if (bottomOfWindow) {
                         this.page++
-                        loadUsers()
+                        this.loadUsers()
                     }
                 }
             }
