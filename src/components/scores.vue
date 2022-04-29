@@ -2,14 +2,14 @@
     <div class="container">
         <div class='row'>
             <div class="col s6">
-                <select ref="modeSelect" class="browser-default" v-model="defualtMode" @change="updateScores($event)">
+                <select ref="modeSelect" class="browser-default" v-model="defualtMode" @change="updateScores()">
                     <option v-for="mode in modes" :value="mode.value">{{mode.text}}</option>
                 </select>
                 <label>Mode</label>
             </div>
 
             <div class="col s6">
-                <select ref="sortBy" class="browser-default" @change="updateScores($event)">
+                <select ref="sortBy" class="browser-default" @change="updateScores()">
                     <option value="hs" selected>Current Scores</option>
                     <option value="current">High Scores</option>
                 </select>
@@ -29,7 +29,7 @@
                 <tbody>
                     <tr v-for="guild in guilds">
                         <td>
-                            <object :data="guild.url" type="image/png" :alt="guild.name" loading="lazy" class="circle guildimg">
+                            <object :data="guild.url" type="image/png" :aria-label="guild.name" loading="lazy" class="circle guildimg">
                                 <img src="/assets/img/error.png" alt="Not found image" class="circle guildimg">
                             </object>
                         </td>
@@ -40,6 +40,12 @@
                 </tbody>
             </table>
         </div>
+    </div>
+
+    <div class="fixed-action-btn">
+        <button class="btn-floating btn-large waves-effect deep-purple darken-2" @click="scrollToTop">
+            <i class="large material-icons">expand_less</i>
+        </button>
     </div>
 </template>
 
@@ -55,6 +61,9 @@
             };
         },
         methods: {
+            scrollToTop() {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            },
             async loadModes(){
                 const modes = await fetch("https://api.numselli.xyz/counting/countingmodes");
                 const modesJSON = await modes.json()
@@ -62,8 +71,9 @@
                     return {value:key, text: modesJSON[key]}
                 })
             },
-            updateScores(event){
-                this.guilds=[]
+            updateScores(){
+                this.guilds = []
+                this.page = 0;
                 this.loadGuilds()
             },
             async loadGuilds() {
@@ -90,12 +100,11 @@
                 return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
             }
         },
-        beforeMount() {
+        beforeMount () {
             this.loadModes()
         },
         mounted(){
             this.loadGuilds();
-
             this.getNextUser()
         }
     }
