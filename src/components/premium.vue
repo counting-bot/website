@@ -19,9 +19,10 @@
                         </div>
                         <div>
                             <ul class="browser-default">
-                                <li>Patreon role in Discord server</li>
-                                <li>Patron-only channel in the Discord server</li>
+                                <li>Supporter role in Discord server</li>
+                                <li>Supporter-only channel in the Discord server</li>
                                 <li>2x voting multiplier</li>
+                                <li>Save slots filled every month</li>
                             </ul>
                         </div>
                     </div>
@@ -49,8 +50,8 @@
                         </div>
                         <div>
                             <ul class="browser-default">
-                                <li>Patreon role in Discord server</li>
-                                <li>Patron-only channel in the Discord server</li>
+                                <li>Supporter role in Discord server</li>
+                                <li>Supporter-only channel in the Discord server</li>
                                 <li>2x voting multiplier</li>
                                 <li>Per channel stats</li>
                             </ul>
