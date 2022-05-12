@@ -27,7 +27,7 @@
                         </div>
                     </div>
                     <div class="card-action">
-                        <a class="waves-effect waves-light btn" @click="buy(1)">Join</a>
+                        <a class="waves-effect waves-light btn disabled" @click="buy(1)">Join</a>
                     </div>
                 </div>
             </div>
@@ -58,7 +58,7 @@
                         </div>
                     </div>
                     <div class="card-action">
-                        <a class="waves-effect waves-light btn" @click="buy(2)">Join</a>
+                        <a class="waves-effect waves-light btn disabled" @click="buy(2)">Join</a>
                     </div>
                 </div>
             </div>
@@ -79,7 +79,7 @@
                         </ul>
                     </div>
                     <div class="card-action">
-                        <a class="waves-effect waves-light btn" @click="buy(3)">Join</a>
+                        <a class="waves-effect waves-light btn disabled" @click="buy(3)">Join</a>
                     </div>
                 </div>
             </div>
