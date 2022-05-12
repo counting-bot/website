@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div>
+        <!-- <div>
             <span>Numbers counted: </span>
             <br>
             <span>correct: </span>
@@ -14,7 +14,7 @@
             <span>guildID: {{guildID}}</span>
             <br>
             <span>channelID: {{channelID}}</span>
-        </div>
+        </div> -->
 
         <table class="striped centered highlight">
             <thead>
@@ -38,21 +38,38 @@
 <script>
     export default {
         name: 'serverStats',
-        props: ["guildID", "channelID"],
+        	props : {
+                guildID : String,
+                channelID: String,
+            },
         data() {
             return {
                 users: [],
                 page: 0,
+                guildid: String,
+                channelid: String
             };
+        },
+        watch: {
+            channelID(val, oldVal) {
+                this.channelid = val
+                this.users = []
+                this.loadUsers()
+            },
+            guildID(val, oldVal) {
+                this.guildid = val
+                this.loadUsers()
+            }
         },
         methods: {
             async loadUsers() {
-                const ajaxdata = await fetch(`https://api.numselli.xyz/counting/userscores?page=${this.page}`).catch(err=>console.error);
-                (await ajaxdata.json()).map(({correctnumbers, username, wrongnumbers}, index) => {
+                const ajaxdata = await fetch(`https://api.numselli.xyz/discordOauth/guildlb/${this.guildid}${this.channelid ? `/${this.channelid}` : ""}?page=${this.page}`, {credentials: "include"}).catch(err=>console.error);
+                const json = await ajaxdata.json();
+                json.map(({correctcount, username}, index) => {
                     this.users.push({
                         rank: ((this.page*60)+index+1),
                         userName: username,
-                        score: (correctnumbers+wrongnumbers).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                        score: (correctcount).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                     });
                 })
             },
@@ -65,18 +82,6 @@
                     }
                 }
             }
-        },
-        beforeMount() {
-            this.loadUsers();
-        },
-        mounted(props) {
-            console.log(props)
-            if (!props?.channelID){
-                console.log("showing guild stats")
-            }else{
-                console.log("showing channel stats")
-            }
-            this.getNextUser()
         }
     }
 </script>
