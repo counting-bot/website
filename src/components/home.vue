@@ -56,6 +56,8 @@ export default {
     const siteData = reactive({
       title: `Counting`,
       description: `The most customizable counting bot. Compete with other Discord servers to get the highest count.`,
+      url: "https://counting.numselli.xyz",
+      image: "https://counting.numselli.xyz/assets/img/CountingIconRound.png"
     })
 
     useHead({
@@ -69,7 +71,10 @@ export default {
           name: `og:title`, 
           content: computed(() => siteData.title),
         },
-
+        {
+          name: "twitter:title",
+          content: computed(() => siteData.title),
+        },
         {
           name: `description`,
           content: computed(() => siteData.description),
@@ -78,26 +83,40 @@ export default {
           name: `og:description`,
           content: computed(() => siteData.description),
         },
-      ],
+        {
+          name: "twitter:description",
+          content: computed(() => siteData.description),
+        },
+        {
+          name: "og:url",
+          content: computed(() => siteData.url)
+        },
+        {
+          name: "twitter:url",
+          content: computed(() => siteData.url)
+        },
+        {
+          name: "og:image",
+          content: computed(() => siteData.image)
+        },
+        {
+          name: "twitter:imag",
+          content: computed(() => siteData.image)
+        },
+        {
+          name: "og:type",
+          content: computed(() => "website")
+        },
+        {
+          name: `keywords`,
+          content: computed(() => "discord counting bot, counting bot, counting game, counting, counting discord"),
+        },
+        {
+          name: `theme-color`,
+          content: computed(() => "#a329d1"),
+        }
+      ]
     })
-  },
-
+  }
 }
 </script>
-
-
-        <!-- 
-        <meta name="keywords" content="discord counting bot, counting bot, counting game, counting, counting discord">
-        <meta name="theme-color" content="#a329d1"> -->
-
-        <!-- Open Graph / Facebook -->
-        <!-- <meta property="og:type" content="website">
-        <meta property="og:url" content="https://counting.numselli.xyz">
-        <meta property="og:image" content="https://counting.numselli.xyz/assets/img/CountingIconRound.png"> -->
-
-        <!-- Twitter -->
-        <!-- <meta property="twitter:card" content="summary_large_image">
-        <meta property="twitter:url" content="https://counting.numselli.xyz">
-        <meta property="twitter:title" content="Counting">
-        <meta property="twitter:description" content="The most customizable counting bot. Compete with other Discord servers to get the highest count.">
-        <meta property="twitter:image" content="https://counting.numselli.xyz/assets/img/CountingIconRound.png"> -->

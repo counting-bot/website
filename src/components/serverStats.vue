@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div>
+        <!-- <div>
             <span>Numbers counted: </span>
             <br>
             <span>correct: </span>
@@ -10,13 +10,8 @@
             <span>accruacay</span>
             <br>
             <span>% contrubeuted to total numbers</span>
-            <br>
-            <span>guildID: {{guildID}}</span>
-            <br>
-            <span>channelID: {{channelID}}</span>
-        </div>
-
-        <table class="striped centered highlight">
+        </div> -->
+        <table class="striped centered highlight" v-if="!(channelID && premiumlevel!=2)">
             <thead>
                 <tr>
                     <th>Rank</th>
@@ -32,51 +27,67 @@
                 </tr>
             </tbody>
         </table>
+        <div v-else class="center-align">
+            <h4>You have discovered a premium feature</h4>
+            <h6>Get per channel statittics and more with Tier 2 premium</h6>
+            <div class="waves-effect waves-light btn pulse">
+                <router-link to="/premium">View premium plans</router-link>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
     export default {
         name: 'serverStats',
-        props: ["guildID", "channelID"],
+        	props : {
+                guildID : String,
+                channelID: String,
+                premiumlevel: Number
+            },
         data() {
             return {
                 users: [],
                 page: 0,
+                guildid: String,
+                channelid: String
             };
+        },
+        watch: {
+            channelID(val) {
+                this.channelid = val
+                this.users = []
+                this.page = 0
+                this.loadUsers()
+            },
+            guildID(val) {
+                this.guildid = val
+                this.users = []
+                this.page = 0
+                this.loadUsers()
+            }
         },
         methods: {
             async loadUsers() {
-                const ajaxdata = await fetch(`https://api.numselli.xyz/counting/userscores?page=${this.page}`).catch(err=>console.error);
-                (await ajaxdata.json()).map(({correctnumbers, username, wrongnumbers}, index) => {
+                const ajaxdata = await fetch(`https://api.numselli.xyz/discordOauth/guildlb/${this.guildid}${this.channelid ? `/${this.channelid}` : ""}?page=${this.page}`, {credentials: "include"}).catch(err=>console.error);
+                const json = await ajaxdata.json();
+                json.map(({correctcount, username}, index) => {
                     this.users.push({
                         rank: ((this.page*60)+index+1),
                         userName: username,
-                        score: (correctnumbers+wrongnumbers).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                        score: (correctcount).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                     });
                 })
-            },
-            getNextUser() {
-                window.onscroll = () => {
-                    let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
-                    if (bottomOfWindow) {
-                        this.page++
-                        loadUsers()
+                if (!window.onscroll){
+                    window.onscroll = () => {
+                        const bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
+                        if (bottomOfWindow) {
+                            this.page++
+                            this.loadUsers()
+                        }
                     }
                 }
             }
-        },
-        beforeMount() {
-            this.loadUsers();
-        },
-        mounted(props) {
-            console.log(props)
-            if (!props?.channelID){
-                console.log("showing guild stats")
-            }else{
-                console.log("showing channel stats")
-            }
-            this.getNextUser()
         }
     }
 </script>
