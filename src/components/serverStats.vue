@@ -54,15 +54,19 @@
             channelID(val, oldVal) {
                 this.channelid = val
                 this.users = []
+                this.page = 0
                 this.loadUsers()
             },
             guildID(val, oldVal) {
                 this.guildid = val
+                this.users = []
+                this.page = 0
                 this.loadUsers()
             }
         },
         methods: {
             async loadUsers() {
+                console.log(window.onscroll)
                 const ajaxdata = await fetch(`https://api.numselli.xyz/discordOauth/guildlb/${this.guildid}${this.channelid ? `/${this.channelid}` : ""}?page=${this.page}`, {credentials: "include"}).catch(err=>console.error);
                 const json = await ajaxdata.json();
                 json.map(({correctcount, username}, index) => {
@@ -72,13 +76,13 @@
                         score: (correctcount).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                     });
                 })
-            },
-            getNextUser() {
-                window.onscroll = () => {
-                    let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
-                    if (bottomOfWindow) {
-                        this.page++
-                        loadUsers()
+                if (!window.onscroll){
+                    window.onscroll = () => {
+                        const bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
+                        if (bottomOfWindow) {
+                            this.page++
+                            this.loadUsers()
+                        }
                     }
                 }
             }
