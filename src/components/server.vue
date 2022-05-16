@@ -11,7 +11,7 @@
                     </div>
                     <div v-for="channel in channels" :key="channel.first" class="waves-effect waves-light btn">
                         <div class="valign-wrapper" @click="change(guildID, channel.channelid)">
-                            <span class="material-icons">tag {{lock}}</span>
+                            <span class="material-icons">tag {{premiumlevel === 2 ? "" : "lock"}}</span>
                             <span>{{channel.name}}</span>
                         </div>
                     </div>
@@ -19,7 +19,7 @@
             </div>
         </div>
         <div class="col s9">
-            <serverStats :guildID="guildID" :channelID="channelID"></serverStats>
+            <serverStats :guildID="guildID" :channelID="channelID" :premiumlevel="premiumlevel"></serverStats>
         </div>
     </div>
     
@@ -38,17 +38,17 @@
         data(){
             return {
                 guildName: "",
-                lock: "",
                 channels:[],
                 guildID:"",
-                channelID: ""
+                channelID: "",
+                premiumlevel:0
             }
         },
         async mounted(){
             this.guildID = this.$route.params.guildid
             this.channelID = this.$route.params.channelID
 
-            const userStats = await fetch(`https://api.numselli.xyz/discordOauth/user`, {credentials: "include"})
+            const userStats = await fetch(`https://api.numselli.xyz/discordOauth/userStats`, {credentials: "include"})
             if (userStats.status === 401) return window.location.href = `https://api.numselli.xyz/discordOauth/login?redirect_to=user`; 
             const userStatsJson = await userStats.json()
 
@@ -57,7 +57,7 @@
 
             this.guildName = guildDataJson.name
             this.channels = guildDataJson.channels
-            this.lock = userStatsJson.premiumlevel == 2 ? "lock" : ""
+            this.premiumlevel = userStatsJson.premiumlevel
         },
         methods:{
             scrollToTop() {
