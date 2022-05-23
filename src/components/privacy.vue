@@ -23,7 +23,7 @@ export default {
   name: 'privacy',
    setup() {
     const siteData = reactive({
-      title: `Counting`,
+      title: `Privacy`,
       description: `The most customizable counting bot. Compete with other Discord servers to get the highest count.`,
       url: "https://counting.numselli.xyz",
       image: "https://counting.numselli.xyz/assets/img/CountingIconRound.png"
