@@ -2,7 +2,7 @@
 
 <script>
 export default {
-  name: 'support',
+  name: 'logout',
     created() {
         fetch("https://api.numselli.xyz/discordOauth/logout", {credentials: "include"})
             window.location.pathname = "/"

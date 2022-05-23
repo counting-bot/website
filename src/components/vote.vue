@@ -3,7 +3,7 @@
 
 <script>
 export default {
-  name: 'support',
+  name: 'vote',
     async created() {
       const userStats = await fetch(`https://api.numselli.xyz/discordOauth/user`, {credentials: "include"})
       if (userStats.status === 401) return window.location.href = `https://api.numselli.xyz/discordOauth/login?redirect_to=vote`; 

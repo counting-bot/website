@@ -51,7 +51,7 @@
 
 <script>
     export default {
-        name: 'userscores',
+        name: 'scores',
         data() {
             return {
                 guilds: [],
