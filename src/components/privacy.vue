@@ -16,6 +16,9 @@
 </template>
 
 <script>
+import { computed, reactive } from 'vue'
+import { useHead } from '@vueuse/head'
+
 export default {
   name: 'privacy',
    setup() {

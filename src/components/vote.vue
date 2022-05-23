@@ -2,22 +2,19 @@
 </template>
 
 <script>
+import { computed, reactive } from 'vue'
+import { useHead } from '@vueuse/head'
+
 export default {
   name: 'vote',
     async created() {
       const userStats = await fetch(`https://api.numselli.xyz/discordOauth/user`, {credentials: "include"})
       if (userStats.status === 401) return window.location.href = `https://api.numselli.xyz/discordOauth/login?redirect_to=vote`; 
-
-      // const votingSites = [
-      //   "https://top.gg/bot/726560538145849374/vote",
-      //   "https://discordbotlist.com/bots/counting-1881/upvote",
-      //   "https://bots.discordlabs.org/bot/726560538145849374/vote",
-      // ]
-      // window.location.href = votingSites[Math.floor((Math.random() * votingSites.length))];
+      // safdsd
     },
      setup() {
     const siteData = reactive({
-      title: `Counting`,
+      title: `Vote`,
       description: `The most customizable counting bot. Compete with other Discord servers to get the highest count.`,
       url: "https://counting.numselli.xyz",
       image: "https://counting.numselli.xyz/assets/img/CountingIconRound.png"

@@ -1,6 +1,9 @@
 <template></template>
 
 <script>
+import { computed, reactive } from 'vue'
+import { useHead } from '@vueuse/head'
+
 export default {
   name: 'invite',
   created() {
@@ -8,7 +11,7 @@ export default {
   },
   setup() {
     const siteData = reactive({
-      title: `Counting`,
+      title: `Invite`,
       description: `The most customizable counting bot. Compete with other Discord servers to get the highest count.`,
       url: "https://counting.numselli.xyz",
       image: "https://counting.numselli.xyz/assets/img/CountingIconRound.png"

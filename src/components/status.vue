@@ -21,6 +21,9 @@
 </template>
 
 <script>
+import { computed, reactive } from 'vue'
+import { useHead } from '@vueuse/head'
+
     const shardStatus = {
         'disconnected': "#FF0000",
         'connecting': "#ff8000",
