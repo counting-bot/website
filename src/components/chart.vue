@@ -15,14 +15,15 @@
 <script>
 import { Line } from 'vue-chartjs'
 import {
- Chart as ChartJS,
+  Chart as ChartJS,
   CategoryScale,
   LinearScale,
   PointElement,
   LineElement,
   Title,
   Tooltip,
-  Legend,} from 'chart.js'
+  Legend,
+} from 'chart.js'
 import { defineComponent, h, PropType } from 'vue'
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
@@ -44,40 +45,36 @@ export default defineComponent({
     height: {
       type: Number,
       default: 400
-    },
-    cssClasses: {
-      default: '',
-      type: String
-    },
-    styles: {
-      type: Object,
-      default: () => {}
-    },
-    plugins: {
-      type: Array,
-      default: () => []
     }
   },
   async setup(props) {
-        const aaa = await fetch("https://api.numselli.xyz/counting/growthtracking")
-        const chartData = await aaa.json()
+    const aaa = await fetch("https://api.numselli.xyz/counting/growthtracking")
+    const chartData = await aaa.json()
 
-            const chartOptions = {
-            responsive: true,
-            maintainAspectRatio: false
-        }
-
-        return () =>
-            h(Line, {
-                chartData,
-                chartOptions,
-                chartId: props.chartId,
-                width: props.width,
-                height: props.height,
-                cssClasses: props.cssClasses,
-                styles: props.styles,
-                plugins: props.plugins
-            })
+    const chartOptions = {
+      responsive: true,
+      maintainAspectRatio: false,
+      title: {
+        display: true,
+        position: "top",
+        text: "Guild Count Over Time",
+        fontSize: 18,
+        fontColor: "#111"
+      },
+      legend: {
+        display: true,
+        position: "bottom"
+      }
     }
+
+    return () =>
+      h(Line, {
+        chartData,
+        chartOptions,
+        chartId: props.chartId,
+        width: props.width,
+        height: props.height
+      })
+  }
 })
 </script>
