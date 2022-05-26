@@ -5,8 +5,6 @@ module.exports = defineConfig({
     client: {
       webSocketURL: 'wss://local.numselli.xyz/ws',
     },
-    // client: false,
-    // webSocketServer: false,
     allowedHosts: 'all'
   },
   configureWebpack: {

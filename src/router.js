@@ -13,6 +13,7 @@ import logout from './components/logout.vue'
 import user from './components/user.vue'
 import server from './components/server.vue'
 import vote from './components/vote.vue'
+import stats from './components/stats.vue'
 
 const routes = [
     {
@@ -74,6 +75,10 @@ const routes = [
     {
         path: '/server/:guildid/:channelID',
         component: server
+    },
+    {
+        path: '/stats',
+        component: stats
     }
 ]
 const router = createRouter({
