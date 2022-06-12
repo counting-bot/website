@@ -10,7 +10,18 @@ export default {
     async created() {
       const userStats = await fetch(`https://api.numselli.xyz/discordOauth/user`, {credentials: "include"})
       if (userStats.status === 401) return window.location.href = `https://api.numselli.xyz/discordOauth/login?redirect_to=vote`; 
-      // safdsd
+
+      // Reminder 
+      // Post to API 
+
+
+      // redirect to voting site
+      const aa = [
+        "https://top.gg/bot/726560538145849374/vote",
+        "https://bots.discordlabs.org/bot/726560538145849374?vote",
+        "https://discordbotlist.com/bots/counting-1881/upvote"
+      ]
+      window.location.href = aa[Math.floor(Math.random() * aa.length)]
     },
      setup() {
     const siteData = reactive({
